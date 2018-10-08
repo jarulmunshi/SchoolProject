@@ -1,7 +1,10 @@
 import React,{Component} from 'react';
 import {Text,Image,View,SafeAreaView,Picker,TouchableOpacity} from 'react-native';
+import ModalDropDown from 'react-native-modal-dropdown';
 import {Card,CardSection,Input,Button,Header} from './common/Common';
 import Color from './../helper/theme/Color';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {emailEmpty,passwordEmpty,checkEmail,empty,oneEmpty} from './../validation/Validation';
 class Registration extends Component{
     constructor(props){
         super(props);
@@ -13,19 +16,42 @@ class Registration extends Component{
             mno:'',
             mnoError:'',
             iconError:'',
+            password:'',
+            passwordError:'',
             loading:false,
             msg:'',
             color:'green',
             isBack:true
         }
     }
-    openPicker=()=>{
-        <Picker
-            style={{ height: 50, width: 100 }}>
-            <Picker.Item label="Class Teacher" value="admin" />
-            <Picker.Item label="Teacher" value="teacher" />
-            <Picker.Item label="Parenta" value="parent" />
-        </Picker>
+    validateData=()=>{
+        if(empty(this.state.email,this.state.password,this.state.mno,this.state.name)){
+            this.setState({iconError:'exclamation-circle'});
+        }
+        else if(oneEmpty(this.state.email,this.state.age,this.state.password,this.state.name)){
+            if(emailEmpty(this.state.email)){
+                this.setState({iconError:'exclamation-circle'});
+            }
+            else if(passwordEmpty(this.state.password)){
+                this.setState({iconError:'exclamation-circle'});
+            }
+            else if(nameEmpty(this.state.name)){
+                this.setState({iconError:'exclamation-circle'});
+            }
+            else {
+                this.setState({iconError:'exclamation-circle'});
+            }
+        }
+        else if(!checkEmail(this.state.email)){
+            this.setState({iconError:'exclamation-circle'});
+        }
+        else if(!checkAge(this.state.age)){
+            this.setState({iconError:'exclamation-circle'});
+
+        }
+        else {
+            alert("DONE");
+        }
     };
     render(){
         //debugger;
@@ -36,48 +62,65 @@ class Registration extends Component{
                 <Card>
                     <CardSection>
                         <Input
-                            placeholder="Enter name"
+                            onChange={(value)=>this.setState({name:value})}
+                            placeholder="Name"
                             label="Username"
                             keyboardType={'default'}
                         />
+                        {this.state.iconError !=="" &&
+                        <Text style={styles.errorStyle}><Icon name={this.state.iconError} size={20}/></Text>}
                     </CardSection>
                     <CardSection>
                         <Input
-                            placeholder="Enter email"
+                            onChange={(value)=>this.setState({email:value})}
+                            placeholder="Email"
                             label="Email"
                             keyboardType={'email-address'}
                         />
+                        {this.state.iconError !=="" &&
+                        <Text style={styles.errorStyle}><Icon name={this.state.iconError} size={20}/></Text>}
                     </CardSection>
                     <CardSection>
                         <Input
+                            onChange={(value)=>this.setState({password:value})}
                             secureTextEntry={true}
-                            placeholder=" Enter password"
+                            placeholder="Password"
                             label="Password"
                             keyboardType={'default'}
                         />
+                        {this.state.iconError !=="" &&
+                        <Text style={styles.errorStyle}><Icon name={this.state.iconError} size={20}/></Text>}
                     </CardSection>
                     <CardSection>
                         <Input
-                            placeholder="Enter mobile no."
+                            onChange={(value)=>this.setState({mno:value})}
+                            placeholder="Mobile no."
                             label="Mobile No."
                             keyboardType={'decimal-pad'}
                         />
+                        {this.state.iconError !=="" &&
+                        <Text style={styles.errorStyle}><Icon name={this.state.iconError} size={20}/></Text>}
                     </CardSection>
                     <CardSection>
-                        <View style={styles.containerStyle}>
-                            <Text style={styles.textStyle}>User Type:</Text>
-                            <TouchableOpacity style={{height:50}}>
-                                <Text style={styles.textSelect}>Select Type</Text>
-                                {/*<Input*/}
-                                    {/*placeholder="Select Your Type"*/}
-                                    {/*label="User Type"*/}
-                                    {/*editable={false}*/}
-                                {/*/>*/}
-                            </TouchableOpacity>
+                        <View style={{flex:1,flexDirection:'row'}}>
+                            <Text style={styles.textSelect}>User Type:</Text>
+                            <ModalDropDown
+                                style={{
+                                    alignSelf:'flex-start',
+                                    height:50,
+                                    width:100,
+                                    flex:2
+                                }}
+                                textStyle={{
+                                    fontSize:16,
+                                    color:Color.extraDark
+                                }}
+                                options={['Class Teacher','Teacher','Parent']}
+                            />
                         </View>
                     </CardSection>
                     <CardSection>
-                        <Button>Register</Button>
+                        <Button onPress={()=>this.validateData()}>Register</Button>
                     </CardSection>
                 </Card>
             </SafeAreaView>
@@ -86,6 +129,10 @@ class Registration extends Component{
     }
 }
 const styles={
+    errorStyle:{
+        color:'red',
+        fontSize:16
+    },
     textStyle:{
         flex:1,
         fontSize:18,
@@ -101,15 +148,18 @@ const styles={
     textSelect:{
         flex:1,
         fontSize:18,
-        color:Color.darkColor,
+        color:Color.lightColor,
         alignSelf:'stretch',
-        width:100
+        paddingLeft:5
     },
     imgStyle:{
         height:80,
         width:170,
         alignSelf:'center',
         marginTop:10
+    },
+    dropdownStyle:{
+
     }
 };
 export default Registration;

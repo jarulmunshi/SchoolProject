@@ -23,7 +23,7 @@ const inputStyles={
     textStyle:{
         flex:1,
         fontSize:18,
-        paddingLeft:20,
+        paddingLeft:5,
         color:Color.lightColor
     },
     inputStyle:{

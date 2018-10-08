@@ -1,7 +1,9 @@
 import React,{Component} from 'react';
 import {Text,View,Image,SafeAreaView,TouchableOpacity} from 'react-native';
 import {CardSection,Card,Input,Button,Header} from './common/Common';
-import Color from './../helper/theme/Color'
+import Color from './../helper/theme/Color';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import {emailEmpty,passwordEmpty,checkEmail} from './../validation/Validation';
 class Login extends Component {
     constructor(props){
         super(props);
@@ -13,7 +15,26 @@ class Login extends Component {
             iconError:''
         };
     }
+    validateUser=()=>{
+        if(emailEmpty(this.state.email) && passwordEmpty(this.state.password)){
+            this.setState({iconError:'exclamation-circle'});
+        }
+        else if(emailEmpty(this.state.email) || passwordEmpty(this.state.password)){
+            if(emailEmpty(this.state.email)){
+                this.setState({iconError:'exclamation-circle'});
+            }
+            else if(passwordEmpty(this.state.password)){
+                this.setState({iconError:'exclamation-circle'});
+            }
+        }
+        else if(!checkEmail(this.state.email)){
+            this.setState({iconError:'exclamation-circle'});
+        }
+        else {
+            alert("Done");
+        }
 
+    };
 
     render(){
         const {imgStyle,viewStyle,headStyle,textStyle,linkStyle,newUserStyle}=styles
@@ -24,15 +45,22 @@ class Login extends Component {
                 <Card>
                     <CardSection>
                         <Input
-                            placeholder="Enter Your Email"
+                            onChange={(value)=>this.setState({email:value,emailError:''})}
+                            placeholder="Email"
                             label="Email"
                         />
+                        {this.state.iconError !=="" &&
+                        <Text style={textStyle}><Icon name={this.state.iconError} size={20}/></Text>}
                     </CardSection>
+
                     <CardSection>
                         <Input
-                            placeholder="Enter Your Password"
+                            onChange={(value)=>this.setState({password:value,passwordError:''})}
+                            placeholder="Password"
                             label="Password"
                         />
+                        {this.state.iconError !=="" &&
+                        <Text style={textStyle}><Icon name={this.state.iconError} size={20}/></Text>}
                     </CardSection>
                     <CardSection>
                         <Button onPress={()=>this.validateUser()}>Login</Button>

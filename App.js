@@ -9,7 +9,10 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Stack from './src/helper/navigation/Stack';
-
+import {Provider} from 'react-redux';
+import {createStore,applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import AppReducer from './src/reducers/index';
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
@@ -19,9 +22,12 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+  store = createStore(AppReducer, applyMiddleware(thunk));
   render() {
     return (
-        <Stack/>
+        <Provider store={this.store}>
+          <Stack/>
+        </Provider>
     );
   }
 }

@@ -22,7 +22,8 @@ const headerStyles={
         shadowColor:'#fff',
         shadowOffset:{width:0,height:5},
         shadowOpacity:0.7,
-        flexDirection:'row'
+        flexDirection:'row',
+        marginTop:20
     },
     textStyle:{
         fontWeight:'bold',

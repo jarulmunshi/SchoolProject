@@ -5,6 +5,8 @@ import {Card,CardSection,Input,Button,Header} from './common/Common';
 import Color from './../helper/theme/Color';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {emailEmpty,passwordEmpty,checkEmail,empty,oneEmpty} from './../validation/Validation';
+import {registerUser} from './../actions/RegistrationAction';
+import {connect} from 'react-redux';
 class Registration extends Component{
     constructor(props){
         super(props);
@@ -18,6 +20,7 @@ class Registration extends Component{
             iconError:'',
             password:'',
             passwordError:'',
+            usertype:'parent',
             loading:false,
             msg:'',
             color:'green',
@@ -45,20 +48,30 @@ class Registration extends Component{
         else if(!checkEmail(this.state.email)){
             this.setState({iconError:'exclamation-circle'});
         }
-        else if(!checkAge(this.state.age)){
-            this.setState({iconError:'exclamation-circle'});
-
-        }
         else {
-            alert("DONE");
+            //alert(this.state.usertype);
+            const data={
+                username:this.state.name,
+                email:this.state.email,
+                password:this.state.password,
+                mobile_no:this.state.mno,
+                user_role:this.state.usertype
+            };
+            //alert(this.state.name+this.state.email+this.state.password+this.state.mno+this.state.usertype);
+            this.props.registerUser(data).then((res)=>{
+                alert("Valid");
+            }).catch((err)=>{
+                alert("error");
+            })
         }
     };
     render(){
         //debugger;
         return(
             <SafeAreaView style={{flex:1,backgroundColor: 'white'}}>
-                <Image source={require('./../image/GD.jpeg')} size={70} style={styles.imgStyle}/>
+                {/*<Image source={require('./../image/GD.jpeg')} size={70} style={styles.imgStyle}/>*/}
                 <Header headerText="Registration" headIcon="registered"/>
+                <Image source={require('./../image/Students.png')} size={50} style={styles.loginImageStyle}/>
                 <Card>
                     <CardSection>
                         <Input
@@ -105,6 +118,7 @@ class Registration extends Component{
                         <View style={{flex:1,flexDirection:'row'}}>
                             <Text style={styles.textSelect}>User Type:</Text>
                             <ModalDropDown
+                                defaultIndex={2}
                                 style={{
                                     alignSelf:'flex-start',
                                     height:50,
@@ -116,6 +130,18 @@ class Registration extends Component{
                                     color:Color.extraDark
                                 }}
                                 options={['Class Teacher','Teacher','Parent']}
+                                onSelect={(value)=>{
+                                    if(value==0){
+                                        data='admin'
+                                    }
+                                    else if(value==1){
+                                        data='teacher'
+                                    }
+                                    else{
+                                        data='parent'
+                                    }
+                                    this.setState({usertype:data})
+                                }}
                             />
                         </View>
                     </CardSection>
@@ -158,8 +184,16 @@ const styles={
         alignSelf:'center',
         marginTop:10
     },
-    dropdownStyle:{
-
+    loginImageStyle:{
+        height:90,
+        width:'100%',
+        alignSelf:'center',
+        marginTop:20
     }
 };
-export default Registration;
+const mapToState=()=>{
+    return{};
+};
+export default connect(mapToState,{
+    registerUser
+})(Registration);

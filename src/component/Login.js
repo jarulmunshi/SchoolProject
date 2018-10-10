@@ -33,14 +33,12 @@ class Login extends Component {
             this.setState({iconError:'exclamation-circle',emailError:'Invalid'});
         }
         else {
-            alert("Done");
             const data={
                 email:this.state.email,
                 password:this.state.password
             };
-            alert(this.state.password);
             this.props.loginUser(data).then((res)=>{
-                alert("Valid");
+                this.props.navigation.navigate('Profile');
             }).catch((err)=>{
                 alert("Invalid");
             })
@@ -58,22 +56,22 @@ class Login extends Component {
                 <Card>
                     <CardSection>
                         <Input
-                            onChange={(value)=>this.setState({email:value,emailError:'',iconError:''})}
+                            onChange={(value)=>this.setState({email:value,emailError:''})}
                             placeholder="Email"
                             label="Email"
                         />
-                        {this.state.iconError !=="" &&
+                        {this.state.emailError !=="" &&
                         <Text style={textStyle}><Icon name={this.state.iconError} size={20}/>{this.state.emailError}</Text>}
                     </CardSection>
 
                     <CardSection>
                         <Input
-                            onChange={(value)=>this.setState({password:value,passwordError:'',iconError:''})}
+                            onChange={(value)=>this.setState({password:value,passwordError:''})}
                             placeholder="Password"
                             label="Password"
                             secureTextEntry={true}
                         />
-                        {this.state.iconError !=="" &&
+                        {this.state.passwordError !=="" &&
                         <Text style={textStyle}><Icon name={this.state.iconError} size={20}/>{this.state.passwordError}</Text>}
                     </CardSection>
                     <CardSection>

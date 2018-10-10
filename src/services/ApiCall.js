@@ -4,6 +4,7 @@ export function callApi(url,type='get',data={},header={}) {
     if(type === 'get'){
         return axios.get(url,{headers: reqHeader})
             .then((response) => {
+                console.log(response);
                 return Promise.resolve(response.data)
             })
             .catch((err) => {
@@ -19,6 +20,14 @@ export function callApi(url,type='get',data={},header={}) {
             });
     }else if(type === 'delete'){
         return axios.delete(url,{headers:reqHeader})
+            .then((response) => {
+                return Promise.resolve(response);
+            })
+            .catch((err) => {
+                return Promise.reject(err);
+            });
+    }else if(type === 'put'){
+        return axios.put(url,data,{headers:reqHeader})
             .then((response) => {
                 return Promise.resolve(response);
             })

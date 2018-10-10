@@ -6,6 +6,7 @@ import Color from './../helper/theme/Color';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {emailEmpty,passwordEmpty,checkEmail,empty,oneEmpty} from './../validation/Validation';
 import {registerUser} from './../actions/RegistrationAction';
+import Home from './common/Home';
 import {connect} from 'react-redux';
 class Registration extends Component{
     constructor(props){
@@ -27,26 +28,53 @@ class Registration extends Component{
             isBack:true
         }
     }
+    onChange=(text,key)=>{
+        let state=this.state;
+        state[key]=text;
+        if(key === 'name'){
+            state['nameError']='';
+            state['msg']='';
+        }
+        else if(key === 'email'){
+            state['emailError']='';
+            state['msg']='';
+        }
+        else if(key === 'password'){
+            state['passwordError']='';
+            state['msg']='';
+        }
+        else if(key === 'mno'){
+            state['mnoError']='';
+            state['msg']='';
+        }
+        this.setState(this.state);
+    };
     validateData=()=>{
         if(empty(this.state.email,this.state.password,this.state.mno,this.state.name)){
-            this.setState({iconError:'exclamation-circle'});
+            this.setState({
+                iconError:'exclamation-circle',
+                emailError:'Require',
+                passwordError:'Require',
+                mnoError:'Require',
+                nameError:'Require'
+            });
         }
         else if(oneEmpty(this.state.email,this.state.age,this.state.password,this.state.name)){
             if(emailEmpty(this.state.email)){
-                this.setState({iconError:'exclamation-circle'});
+                this.setState({iconError:'exclamation-circle',emailError:'Require'});
             }
             else if(passwordEmpty(this.state.password)){
-                this.setState({iconError:'exclamation-circle'});
+                this.setState({iconError:'exclamation-circle',passwordError:'Require'});
             }
             else if(nameEmpty(this.state.name)){
-                this.setState({iconError:'exclamation-circle'});
+                this.setState({iconError:'exclamation-circle',nameError:'Require'});
             }
             else {
-                this.setState({iconError:'exclamation-circle'});
+                this.setState({iconError:'exclamation-circle',mnoError:'Require'});
             }
         }
         else if(!checkEmail(this.state.email)){
-            this.setState({iconError:'exclamation-circle'});
+            this.setState({iconError:'exclamation-circle',emailError:'Invalid'});
         }
         else {
             //alert(this.state.usertype);
@@ -73,49 +101,20 @@ class Registration extends Component{
                 <Header headerText="Registration" headIcon="registered"/>
                 <Image source={require('./../image/Students.png')} size={50} style={styles.loginImageStyle}/>
                 <Card>
+                    <Home
+                        name={this.state.name}
+                        nameError={this.state.nameError}
+                        email={this.state.email}
+                        emailError={this.state.emailError}
+                        password={this.state.password}
+                        passwordError={this.state.passwordError}
+                        mno={this.state.mno}
+                        mnoError={this.state.mnoError}
+                        iconError={this.state.iconError}
+                        onChange={this.onChange}
+                    />
                     <CardSection>
-                        <Input
-                            onChange={(value)=>this.setState({name:value})}
-                            placeholder="Name"
-                            label="Username"
-                            keyboardType={'default'}
-                        />
-                        {this.state.iconError !=="" &&
-                        <Text style={styles.errorStyle}><Icon name={this.state.iconError} size={20}/></Text>}
-                    </CardSection>
-                    <CardSection>
-                        <Input
-                            onChange={(value)=>this.setState({email:value})}
-                            placeholder="Email"
-                            label="Email"
-                            keyboardType={'email-address'}
-                        />
-                        {this.state.iconError !=="" &&
-                        <Text style={styles.errorStyle}><Icon name={this.state.iconError} size={20}/></Text>}
-                    </CardSection>
-                    <CardSection>
-                        <Input
-                            onChange={(value)=>this.setState({password:value})}
-                            secureTextEntry={true}
-                            placeholder="Password"
-                            label="Password"
-                            keyboardType={'default'}
-                        />
-                        {this.state.iconError !=="" &&
-                        <Text style={styles.errorStyle}><Icon name={this.state.iconError} size={20}/></Text>}
-                    </CardSection>
-                    <CardSection>
-                        <Input
-                            onChange={(value)=>this.setState({mno:value})}
-                            placeholder="Mobile no."
-                            label="Mobile No."
-                            keyboardType={'decimal-pad'}
-                        />
-                        {this.state.iconError !=="" &&
-                        <Text style={styles.errorStyle}><Icon name={this.state.iconError} size={20}/></Text>}
-                    </CardSection>
-                    <CardSection>
-                        <View style={{flex:1,flexDirection:'row'}}>
+                        <View style={{flex:1,flexDirection:'row',height:40,alignItems:'center'}}>
                             <Text style={styles.textSelect}>User Type:</Text>
                             <ModalDropDown
                                 defaultIndex={2}
@@ -155,34 +154,17 @@ class Registration extends Component{
     }
 }
 const styles={
-    errorStyle:{
-        color:'red',
-        fontSize:16
-    },
     textStyle:{
         flex:1,
         fontSize:18,
         paddingLeft:20,
         color:Color.lightColor
     },
-    containerStyle:{
-        height:40,
-        flex:1,
-        flexDirection:'row',
-        alignItems:'center'
-    },
     textSelect:{
         flex:1,
         fontSize:18,
-        color:Color.lightColor,
-        alignSelf:'stretch',
-        paddingLeft:5
-    },
-    imgStyle:{
-        height:80,
-        width:170,
-        alignSelf:'center',
-        marginTop:10
+        paddingLeft:5,
+        color:Color.lightColor
     },
     loginImageStyle:{
         height:90,

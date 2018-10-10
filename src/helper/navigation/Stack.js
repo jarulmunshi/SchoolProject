@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './../../component/Login';
 import Registration from './../../component/Registration';
+import Tab from './Tab';
 import {createStackNavigator} from 'react-navigation';
 
 const stack = createStackNavigator(
@@ -10,10 +11,13 @@ const stack = createStackNavigator(
         },
         Registration:{
             screen:Registration
+        },
+        Tab:{
+            screen:Tab
         }
     },
     {
-        initialRouteName:'Login',
+        initialRouteName:'Tab',
         headerMode:'none'
     }
 );

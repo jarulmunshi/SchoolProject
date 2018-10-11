@@ -29,14 +29,15 @@ class Profile extends Component{
         }
     }
 
-    componentDidMount=()=>{
-        this.props.getUser().then((res)=>{
-            alert(res);
-        }).catch((err)=>{
-            console.log(err);
-            alert("error");
-        })
-    };
+    // componentDidMount=()=>{
+    //     this.props.getUser().then((res)=>{
+    //         console.log(res);
+    //         alert(res[0].user_id);
+    //     }).catch((err)=>{
+    //         console.log(err);
+    //         alert("error");
+    //     })
+    // };
     onChange=(text,key)=>{
         let state=this.state;
         state[key]=text;

@@ -9,7 +9,8 @@ export const getUser=()=>{
             dispatch({
                 type:USER_DETAIL,
                 payload:data
-            })
+            });
+            return Promise.resolve(res);
 
         }).catch((err)=>{
             debugger

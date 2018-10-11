@@ -1,7 +1,6 @@
 import React from 'react';
 import {TabNavigator,TabBarBottom} from 'react-navigation';
-import Profile from './../../component/Profile';
-import Student from './../../component/Student';
+import Account from './../../component/Account';
 import Welcome from './../../component/Welcome';
 import Icon from 'react-native-vector-icons/FontAwesome';
 export default TabNavigator(
@@ -17,23 +16,12 @@ export default TabNavigator(
             )
 })
         },
-        Profile:{
-            screen:Profile,
+        Account:{
+            screen:Account,
             navigationOptions: () => ({
                 tabBarIcon: () => (
                     <Icon
                         name="user-circle"
-                        size={24}
-                    />
-                )
-            })
-        },
-        Student:{
-            screen:Student,
-            navigationOptions: () => ({
-                tabBarIcon: () => (
-                    <Icon
-                        name="user-plus"
                         size={24}
                     />
                 )

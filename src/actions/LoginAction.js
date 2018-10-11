@@ -8,9 +8,9 @@ export const loginUser=(user)=>{
         return callApi(ApiConstant.baseUrl+ApiConstant.signUp+ApiConstant.login,'post',user,{}).then((res)=>{
             dispatch({
                 type:USER_DETAIL,
-                payload:user
-            })
-
+                payload:res
+            });
+            return Promise.resolve(res.data);
         }).catch((err)=>{
             debugger
         })

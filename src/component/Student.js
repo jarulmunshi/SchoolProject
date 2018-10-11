@@ -16,14 +16,24 @@ class Student extends Component{
             gender:'female',
             pname:'',
             pmno:'',
+            isBack:true,
+            iName:'chevron-left'
         }
     }
-
+    onBackButtonPress=()=>{
+        this.props.navigation.goBack();
+    };
     render(){
         //debugger;
         return(
             <SafeAreaView style={{flex:1,backgroundColor: 'white'}}>
-                <Header headerText="Add Student" headIcon="user-plus"/>
+                <Header
+                    headerText="Add Student"
+                    headIcon="user-plus"
+                    onBackButtonPress={this.onBackButtonPress}
+                    isBack={this.state.isBack}
+                    iName={this.state.iName}
+                />
                 <Image source={require('./../image/stud.png')} size={30} style={styles.headImgStyle}/>
                 <Card>
                     <CardSection>

@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {Text,Image,View,SafeAreaView,TouchableOpacity} from 'react-native';
 import {Card,CardSection,Button,Header} from './common/Common';
 import Color from './../helper/theme/Color';
-import {getUser} from './../actions/ProfileAction';
+import {updateUser} from './../actions/ProfileAction';
 import Home from './common/Home';
 import {connect} from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
@@ -10,34 +10,42 @@ import Icon from 'react-native-vector-icons';
 class Profile extends Component{
     constructor(props){
         super(props);
+        debugger;
         this.state={
-            name:'',
+            id:props.userDetail.user_id,
+            name:props.userDetail.username||'',
             nameError:'',
-            email:'',
+            email:props.userDetail.email||'',
             emailError:'',
-            mno:'',
+            mno:props.userDetail.mobile_no||'',
             mnoError:'',
             iconError:'',
-            password:'',
+            password:props.userDetail.password||'',
             passwordError:'',
             loading:false,
             msg:'',
             color:'green',
             isBack:true,
-            usertype:'',
-            img:''
+            usertype:props.userDetail.user_role||'',
+            img:'',
+            iName:'chevron-left'
         }
     }
-
-    // componentDidMount=()=>{
-    //     this.props.getUser().then((res)=>{
-    //         console.log(res);
-    //         alert(res[0].user_id);
-    //     }).catch((err)=>{
-    //         console.log(err);
-    //         alert("error");
-    //     })
-    // };
+    onBackButtonPress=()=>{
+        this.props.navigation.goBack();
+    };
+    onUpdate=()=>{
+        const data={
+            username:this.state.name,
+            email:this.state.email,
+            mno:this.state.mno
+        };
+        this.props.updateUser(data).then((res)=>{
+            alert("done");
+        }).catch((err)=>{
+            alert("Invalid");
+        })
+    };
     onChange=(text,key)=>{
         let state=this.state;
         state[key]=text;
@@ -84,9 +92,16 @@ class Profile extends Component{
     };
     render(){
         //debugger;
+        //console.log(this.props.userDetail);
         return(
             <SafeAreaView style={{flex:1,backgroundColor: 'white'}}>
-                <Header headerText="Profile Settings" headIcon="user-circle"/>
+                <Header
+                    headerText="Profile Settings"
+                    headIcon="user-circle"
+                    onBackButtonPress={this.onBackButtonPress}
+                    isBack={this.state.isBack}
+                    iName={this.state.iName}
+                />
                 <TouchableOpacity onPress={()=>this.showImagePicker()}>
                     <Image source={require('./../image/User.png')} style={styles.imgStyle}/>
                 </TouchableOpacity>
@@ -111,11 +126,11 @@ class Profile extends Component{
                             alignItems:'center'
                         }}>
                             <Text style={styles.textSelect}>User Type:</Text>
-                            <Text>{this.state.usertype}</Text>
+                            <Text style={styles.textSelect}>{this.state.usertype}</Text>
                         </View>
                     </CardSection>
                     <CardSection>
-                        <Button>Update Profile</Button>
+                        <Button onPress={()=>this.onUpdate()}>Update Profile</Button>
                     </CardSection>
                 </Card>
             </SafeAreaView>
@@ -137,9 +152,11 @@ const styles={
         marginTop:10
     }
 };
-const mapToState=()=>{
-    return{};
+const mapStateToProps=(state)=>{
+    return{
+        userDetail:state.user.userDetail
+    };
 };
-export default connect(mapToState,{
-    getUser
+export default connect(mapStateToProps,{
+    updateUser
 })(Profile);

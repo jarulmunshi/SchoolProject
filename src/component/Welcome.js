@@ -4,9 +4,8 @@ import Color from './../helper/theme/Color';
 class Welcome extends Component{
     constructor(props){
         super(props);
-        // const user=this.props.navigation.state.params.name ||'';
         this.state={
-            uname:''
+            uname:props.navigation.state.params.name ||''
         }
     }
     render(){

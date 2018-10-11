@@ -40,7 +40,7 @@ class Login extends Component {
             this.props.loginUser(data).then((res)=>{
                 const name=res.username;
                 console.log("Data===="+name);
-                this.props.navigation.navigate('Tab',{name:res.username});
+                this.props.navigation.navigate('Tab',{res,name:res.username});
             }).catch((err)=>{
                 alert("Invalid");
             })

@@ -7,7 +7,15 @@ const Header = (props) =>{
     const {headerStyle,textStyle} = headerStyles;
     return(
         <View style={headerStyle}>
-            <View style={{flexDirection:'row',paddingTop:5}}>
+            <View style={{flex:1}}>
+                {props.isBack&&
+                <TouchableWithoutFeedback onPress={()=>props.onBackButtonPress()}>
+                    <Icon name={props.iName} size={25} style={{color:Color.darkColor}}/>
+                    {/*<Icon style={{paddingRight:5,color:'rgb(43,83,137)'}} name={props.headIcon} size={25}/>*/}
+                </TouchableWithoutFeedback>}
+
+            </View>
+            <View style={{flex:2,flexDirection:'row',paddingTop:5}}>
                 <Icon style={{paddingRight:5,color:Color.lightColor}} name={props.headIcon} size={25}/>
                 <Text style={textStyle}>{props.headerText}</Text>
             </View>

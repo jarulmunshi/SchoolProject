@@ -6,11 +6,14 @@ export const loginUser=(user)=>{
     debugger;
     return(dispatch,getState)=>{
         return callApi(ApiConstant.baseUrl+ApiConstant.signUp+ApiConstant.login,'post',user,{}).then((res)=>{
-            dispatch({
-                type:USER_DETAIL,
-                payload:res
+            return Promise.all([
+                dispatch({
+                    type:USER_DETAIL,
+                    payload:res.data
+                })
+            ]).then(r=>{
+                return Promise.resolve(res.data)
             });
-            return Promise.resolve(res.data);
         }).catch((err)=>{
             debugger
         })

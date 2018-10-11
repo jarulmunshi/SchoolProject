@@ -10,10 +10,10 @@ const INTIAL_STATE={
 };
 
 export default (state=INTIAL_STATE,action)=> {
+    debugger;
     switch (action.type) {
         case USER_DETAIL:
-            debugger;
-            //console.log("Data"+action.payload.data.username);
+            // console.log("Data"+action.payloa);
             return {...state, userDetail: action.payload};
         default:
             return state;

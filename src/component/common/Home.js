@@ -33,6 +33,7 @@ class Home extends Component{
                             placeholder="Name"
                             label="Username"
                             keyboardType={'default'}
+                            value={this.props.name}
                         />
                         {this.props.nameError !=="" &&
                         <Text style={styles.errorStyle}><Icon name={this.props.iconError} size={20}/>{this.props.nameError}</Text>}
@@ -43,6 +44,7 @@ class Home extends Component{
                             placeholder="Email"
                             label="Email"
                             keyboardType={'email-address'}
+                            value={this.props.email}
                         />
                         {this.props.emailError !=="" &&
                         <Text style={styles.errorStyle}><Icon name={this.props.iconError} size={20}/>{this.props.emailError}</Text>}
@@ -54,6 +56,7 @@ class Home extends Component{
                             placeholder="Password"
                             label="Password"
                             keyboardType={'default'}
+                            value={this.props.password}
                         />
                         {this.props.passwordError !=="" &&
                         <Text style={styles.errorStyle}><Icon name={this.props.iconError} size={20}/>{this.props.passwordError}</Text>}
@@ -64,6 +67,7 @@ class Home extends Component{
                             placeholder="Mobile no."
                             label="Mobile No."
                             keyboardType={'decimal-pad'}
+                            value={this.props.mno}
                         />
                         {this.props.mnoError !=="" &&
                         <Text style={styles.errorStyle}><Icon name={this.props.iconError} size={20}/>{this.props.mnoError}</Text>}

@@ -1,36 +1,72 @@
 import React,{Component} from 'react';
-import {Text,View,SafeAreaView,Image} from 'react-native';
+import {Text,View,SafeAreaView,Image,TouchableOpacity} from 'react-native';
 import {Header} from './common/Common';
 import Icon from 'react-native-vector-icons/FontAwesome';
 class Account extends Component{
     render(){
+        const {viewStyle,viewTextStyle,viewIconStyle,
+            imgStyle,childViewStyle,txtStyle,settingsStyle,
+            settingsTextStyle,viewLinkStyle,profileIcon,profileTextStyle}=styles;
         return(
             <SafeAreaView style={{flex:1,backgroundColor:'white'}}>
-                <Header headerText="Account" headIcon="user-circle"/>
-                <View style={styles.viewStyle}>
-                    <Image style={styles.imgStyle} source={require('./../image/userIcon.png')} resizeMode="contain"/>
-                    <View style={styles.childViewStyle}>
-                        <Text style={styles.txtStyle}>Jarul</Text>
-                        <Text style={styles.txtStyle}>+91 7600923449</Text>
+                <Header headerText="Account" headIcon="at"/>
+                <View style={viewStyle}>
+                    <Image style={imgStyle} source={require('./../image/userIcon.png')} resizeMode="contain"/>
+                    <View style={childViewStyle}>
+                        <Text style={txtStyle}>Jarul</Text>
+                        <Text style={txtStyle}>+91 7600923449</Text>
                     </View>
                 </View>
-                <View style={styles.settingsStyle}>
-                    <Text style={styles.settingsTextStyle}>SETTINGS</Text>
+                <View style={settingsStyle}>
+                    <Text style={settingsTextStyle}>SETTINGS</Text>
                 </View>
-                <View style={{flex:1}}>
-                    <View style={styles.viewLinkStyle}>
-                        <View style={{flex:1}}>
-                            <Icon style={styles.viewIconStyle}name="user-circle" size={20}/>
+                <View style={{flex:0.2}}>
+                        <TouchableOpacity style={viewLinkStyle} onPress={()=>{this.props.navigation.navigate('Profile')}}>
+                            <View style={viewIconStyle}>
+                                <Icon name="user-circle" size={20}/>
+                            </View>
+                            <View style={viewTextStyle}>
+                                <Text style={profileTextStyle}>Manage Profile</Text>
+                                <Icon style={profileIcon} name="angle-right" size={20}/>
+                            </View>
+                        </TouchableOpacity>
+
+                    <TouchableOpacity style={viewLinkStyle} onPress={()=>{this.props.navigation.navigate('Student')}}>
+                        <View style={viewIconStyle}>
+                            <Icon name="user-plus" size={20}/>
                         </View>
-                        <View style={styles.viewTextStyle}>
-                            <Text style={styles.txtStyle}>Manage Profile</Text>
+                        <View style={viewTextStyle}>
+                            <Text style={profileTextStyle}>Add Student</Text>
+                            <Icon style={profileIcon} name="angle-right" size={20}/>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={settingsStyle}>
+                    <Text style={settingsTextStyle}>HELP</Text>
+                </View>
+                <View style={{flex:0.2}}>
+                    <TouchableOpacity style={viewLinkStyle} onPress={()=>{this.props.navigation.navigate('Help')}}>
+                        <View style={viewIconStyle}>
+                            <Icon name="question-circle" size={20}/>
+                        </View>
+                        <View style={viewTextStyle}>
+                            <Text style={profileTextStyle}>Help</Text>
+                            <Icon style={profileIcon} name="angle-right" size={20}/>
                         </View>
 
-                    </View>
-                    <Text style={styles.txtStyle}>Add student</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={viewLinkStyle}>
+                        <View style={viewIconStyle}>
+                            <Icon name="sign-out" size={20}/>
+                        </View>
+                        <View style={viewTextStyle}>
+                            <Text style={profileTextStyle}>Log Out</Text>
+                            <Icon style={profileIcon} name="angle-right" size={20}/>
+                        </View>
+                    </TouchableOpacity>
                 </View>
-                <View style={{flex:2}}>
-
+                <View style={viewStyle}>
+                    <Text>Made with <Icon name="heart" size={15} style={{color:'red'}}/> in India</Text>
                 </View>
             </SafeAreaView>
         )
@@ -38,7 +74,7 @@ class Account extends Component{
 }
 const styles={
     viewStyle:{
-        flex:0.6,
+        flex:0.2,
         flexDirection:'row',
         backgroundColor:'rgb(249,250,252)',
         marginTop:10,
@@ -59,27 +95,43 @@ const styles={
         paddingLeft:5,
     },
     settingsStyle:{
-        flex:0.3,
-        backgroundColor:'rgb(249,250,252)'
+        flex:0.1,
+        backgroundColor:'rgb(249,250,252)',
+        justifyContent:'center'
     },
     settingsTextStyle:{
-        flex:1,
+        flex:0.5,
         marginLeft:20,
         marginTop:10
     },
     viewLinkStyle:{
         flexDirection:'row',
-        flex:0.3
+        flex:0.4,
+        marginTop:5
     },
     viewIconStyle:{
+        flex:0.3,
+        borderRadius:5,
+        marginLeft:10,
         borderWidth:1,
-        marginLeft:10
+        borderColor:'#ddd',
+        alignItems:'center',
+        justifyContent:'center'
     },
     viewTextStyle:{
-        borderBottomWidth:1,
-        borderColor:'gray',
+        borderBottomWidth:0.7,
+        borderColor:'#ddd',
         flex:3,
-        marginLeft:10
+        marginLeft:10,
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    profileTextStyle:{
+        flex:0.9
+    },
+    profileIcon:{
+        flex:0.1
     }
 };
 export default Account;

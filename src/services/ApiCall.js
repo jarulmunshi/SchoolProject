@@ -2,10 +2,11 @@ import axios from 'axios';
 export function callApi(url,type='get',data={},header={}) {
     let reqHeader = Object.assign(header, {"Accept":"application/json", "Content-Type": "application/json"});
     if(type === 'get'){
-
+        debugger;
         return axios.get(url,{headers: reqHeader})
             .then((response) => {
-                //console.log(response);
+                console.log(url);
+                debugger;
                 return Promise.resolve(response.data)
             })
             .catch((err) => {

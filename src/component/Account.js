@@ -87,8 +87,7 @@ const styles={
         flex:1,
         height:70,
         width:70,
-        marginLeft:10,
-        marginTop:10
+        marginLeft:10
     },
     childViewStyle:{
         flex:3,
@@ -139,7 +138,7 @@ const styles={
     textBottomStyle:{
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'white',
+        backgroundColor:'',
         marginTop:40
     }
 };

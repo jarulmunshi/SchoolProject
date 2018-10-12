@@ -18,3 +18,19 @@ export const newStudent=(stud)=>{
     }
 
 };
+
+export const getStudents=()=>{
+    debugger;
+    return(dispatch,getState)=>{
+        return callApi(ApiConstant.baseUrl+ApiConstant.signIn,'get',{},{}).then((res)=>{
+            debugger;
+            dispatch({
+                type:STUDENT_DETAIL,
+                payload:res
+            });
+            return Promise.resolve(res);
+        }).catch((err)=>{
+            debugger
+        })
+    }
+};

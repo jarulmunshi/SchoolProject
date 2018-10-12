@@ -13,7 +13,7 @@ class Student extends Component{
             bgMale:'',
             name:'',
             bdate:'',
-            gender:'female',
+            gender:1,
             pname:'',
             pmno:'',
             isBack:true,
@@ -24,17 +24,18 @@ class Student extends Component{
         this.props.navigation.goBack();
     };
     addStudent=()=>{
+        alert(this.state.gender);
         const data={
             student_name:this.state.name,
-            gender:this.state.gender,
+            Gender:this.state.gender,
             dob:this.state.bdate,
             parent_name:this.state.pname,
             parent_mno:this.state.pmno
         };
         this.props.newStudent(data).then((r)=>{
             debugger;
-            this.setState({name:'',gender:'female',bdate:'',pname:'',pmno:''})
-          alert("New Student Successfully added");
+            this.setState({name:'',gender:1,bdate:'',pname:'',pmno:''})
+            alert("New Student Successfully added");
         }).catch((err)=>{
             alert("Please try again");
             })
@@ -67,13 +68,13 @@ class Student extends Component{
                             <Text style={styles.textSelect}>Gender</Text>
                             <TouchableOpacity style={[styles.viewStyle,{backgroundColor:this.state.bgFemale}]}
                                               onPress={()=>this.setState({
-                                                  gender:'female',bgFemale:Color.darkColor,bgMale:'white'
+                                                  gender:1,bgFemale:Color.darkColor,bgMale:'white'
                                               })}>
                                     <Image style={styles.imgStyle} source={require('./../image/Profile.png')} size={30}/>
                             </TouchableOpacity>
                             <TouchableOpacity style={[styles.viewStyle,{backgroundColor:this.state.bgMale}]}
                                               onPress={()=>this.setState({
-                                                  gender:'male',bgMale:Color.darkColor,bgFemale:'white'
+                                                  gender:0,bgMale:Color.darkColor,bgFemale:'white'
                                               })}>
                                     <Image style={styles.imgStyle} source={require('./../image/Profile2.png')} size={30}/>
                             </TouchableOpacity>

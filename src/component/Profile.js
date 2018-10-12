@@ -45,7 +45,7 @@ class Profile extends Component{
             mobile_no:this.state.mno
         };
         this.props.updateUser(data).then((res)=>{
-            alert("Data updated Successfully");
+            alert("Data updated Success");
         }).catch((err)=>{
             alert("Invalid");
         })

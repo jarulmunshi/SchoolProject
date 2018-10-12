@@ -1,9 +1,10 @@
 import React from 'react';
-import {TabNavigator,TabBarBottom} from 'react-navigation';
+import {TabNavigator,TabBarBottom,createBottomTabNavigator} from 'react-navigation';
 import Account from './../../component/Account';
 import Welcome from './../../component/Welcome';
 import Icon from 'react-native-vector-icons/FontAwesome';
-export default TabNavigator(
+import Color from './../theme/Color';
+export default createBottomTabNavigator(
     {
         Welcome:{
             screen:Welcome,
@@ -29,10 +30,8 @@ export default TabNavigator(
         }
     },
     {
-        tabBarComponent: TabBarBottom,
-        tabBarPosition: 'bottom',
         tabBarOptions: {
-            activeTintColor: 'rgb(222,151,37)',
+            activeTintColor:Color.darkColor,
             inactiveTintColor: 'gray',
             showIcon:true
         },

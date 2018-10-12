@@ -15,17 +15,17 @@ const Header = (props) =>{
                 </TouchableWithoutFeedback>}
 
             </View>
-            <View style={{flex:2,flexDirection:'row',paddingTop:5}}>
+            <View style={{flex:2,flexDirection:'row',paddingTop:5,alignItems:'center',justifyContent:'center'}}>
                 <Icon style={{paddingRight:5,color:Color.lightColor}} name={props.headIcon} size={25}/>
                 <Text style={textStyle}>{props.headerText}</Text>
+            </View>
+            <View style={{flex:1}}>
             </View>
         </View>
     )
 };
 const headerStyles={
     headerStyle:{
-        justifyContent:'center',
-        alignItems:'center',
         borderColor:'#ddd',
         shadowColor:'#fff',
         shadowOffset:{width:0,height:5},
@@ -36,7 +36,8 @@ const headerStyles={
     textStyle:{
         fontWeight:'bold',
         fontSize:20,
-        color:Color.darkColor
+        color:Color.darkColor,
+
     }
 };
 export {Header};

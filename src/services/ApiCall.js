@@ -16,9 +16,13 @@ export function callApi(url,type='get',data={},header={}) {
     }else if(type === 'post') {
         return axios.post(url,data,{headers: reqHeader})
             .then((response) => {
+                debugger;
+                console.log(url);
                 return Promise.resolve(response)
             })
             .catch((err) => {
+                debugger;
+                console.log(url);
                 return Promise.reject(err);
             });
     }else if(type === 'delete'){

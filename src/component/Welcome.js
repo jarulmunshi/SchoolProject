@@ -27,8 +27,7 @@ const styles={
     textStyle:{
         fontSize:25,
         color:Color.darkColor,
-        alignSelf:'center',
-        justifySelf:'center',
+        alignSelf:'center'
     }
 };
 export default Welcome;

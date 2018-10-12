@@ -4,7 +4,7 @@ import {Card,CardSection,Button,Input,Header} from './common/Common';
 import Color from './../helper/theme/Color';
 import DatePicker from 'react-native-datepicker';
 import {connect} from 'react-redux';
-
+import {newStudent} from './../actions/StudentAction';
 class Student extends Component{
     constructor(props){
         super(props);
@@ -22,6 +22,22 @@ class Student extends Component{
     }
     onBackButtonPress=()=>{
         this.props.navigation.goBack();
+    };
+    addStudent=()=>{
+        const data={
+            student_name:this.state.name,
+            gender:this.state.gender,
+            dob:this.state.bdate,
+            parent_name:this.state.pname,
+            parent_mno:this.state.pmno
+        };
+        this.props.newStudent(data).then((r)=>{
+            debugger;
+            this.setState({name:'',gender:'female',bdate:'',pname:'',pmno:''})
+          alert("New Student Successfully added");
+        }).catch((err)=>{
+            alert("Please try again");
+            })
     };
     render(){
         //debugger;
@@ -43,6 +59,7 @@ class Student extends Component{
                             placeholder="Name"
                             label="Student name"
                             keyboardType={'default'}
+                            value={this.state.name}
                         />
                     </CardSection>
                     <CardSection>
@@ -81,6 +98,7 @@ class Student extends Component{
                             placeholder="Parent Name"
                             label="Parent name"
                             keyboardType={'default'}
+                            value={this.state.pname}
                         />
                     </CardSection>
                     <CardSection>
@@ -89,11 +107,11 @@ class Student extends Component{
                             placeholder="Mobile No."
                             label="Parent No."
                             keyboardType={'number-pad'}
+                            value={this.state.pmno}
                         />
                     </CardSection>
                     <CardSection>
-                        <Button onPress={()=>{alert(this.state.bdate + this.state.name + this.state.gender +
-                        this.state.pmno + this.state.pname)}}>Add</Button>
+                        <Button onPress={()=>this.addStudent()}>Add</Button>
                     </CardSection>
                 </Card>
             </ScrollView>
@@ -136,7 +154,9 @@ const styles={
         height:70
     }
 };
-const mapToState=()=>{
+const mapStateToProps=()=>{
     return{};
 };
-export default Student;
+export default connect(mapStateToProps,{
+    newStudent
+})(Student);

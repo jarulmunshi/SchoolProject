@@ -6,70 +6,69 @@ class Account extends Component{
     render(){
         const {viewStyle,viewTextStyle,viewIconStyle,
             imgStyle,childViewStyle,txtStyle,settingsStyle,
-            settingsTextStyle,viewLinkStyle,profileIcon,profileTextStyle}=styles;
+            settingsTextStyle,viewLinkStyle,profileIcon,profileTextStyle,textBottomStyle}=styles;
         return(
-            <SafeAreaView style={{backgroundColor:'white'}}>
-                <ScrollView>
-                    <View style={{height:Dimensions.get('window').height - 20}}>
-                    <Header headerText="Account" headIcon="at"/>
-                    <View style={viewStyle}>
-                        <Image style={imgStyle} source={require('./../image/userIcon.png')} resizeMode="contain"/>
-                        <View style={childViewStyle}>
-                            <Text style={txtStyle}>Jarul</Text>
-                            <Text style={txtStyle}>+91 7600923449</Text>
+            <SafeAreaView style={{backgroundColor:'white',flex:1}}>
+                <ScrollView
+                automaticallyAdjustContentInsets={false}>
+                    <View>
+                        <Header headerText="Account" headIcon="at"/>
+                        <View style={viewStyle}>
+                            <Image style={imgStyle} source={require('./../image/userIcon.png')} resizeMode="contain"/>
+                            <View style={childViewStyle}>
+                                <Text style={txtStyle}>Jarul</Text>
+                                <Text style={txtStyle}>+91 7600923449</Text>
+                            </View>
                         </View>
-                    </View>
-                    <View style={settingsStyle}>
-                        <Text style={settingsTextStyle}>SETTINGS</Text>
-                    </View>
-                    <View style={{flex:0.2}}>
-                            <TouchableOpacity style={viewLinkStyle} onPress={()=>{this.props.navigation.navigate('Profile')}}>
+                        <View style={settingsStyle}>
+                            <Text style={settingsTextStyle}>SETTINGS</Text>
+                        </View>
+
+                                <TouchableOpacity style={viewLinkStyle} onPress={()=>{this.props.navigation.navigate('Profile')}}>
+                                    <View style={viewIconStyle}>
+                                        <Icon name="user-circle" size={20}/>
+                                    </View>
+                                    <View style={viewTextStyle}>
+                                        <Text style={profileTextStyle}>Manage Profile</Text>
+                                        <Icon style={profileIcon} name="angle-right" size={20}/>
+                                    </View>
+                                </TouchableOpacity>
+
+                            <TouchableOpacity style={viewLinkStyle} onPress={()=>{this.props.navigation.navigate('Student')}}>
                                 <View style={viewIconStyle}>
-                                    <Icon name="user-circle" size={20}/>
+                                    <Icon name="user-plus" size={20}/>
                                 </View>
                                 <View style={viewTextStyle}>
-                                    <Text style={profileTextStyle}>Manage Profile</Text>
+                                    <Text style={profileTextStyle}>Add Student</Text>
                                     <Icon style={profileIcon} name="angle-right" size={20}/>
                                 </View>
                             </TouchableOpacity>
 
-                        <TouchableOpacity style={viewLinkStyle} onPress={()=>{this.props.navigation.navigate('Student')}}>
-                            <View style={viewIconStyle}>
-                                <Icon name="user-plus" size={20}/>
-                            </View>
-                            <View style={viewTextStyle}>
-                                <Text style={profileTextStyle}>Add Student</Text>
-                                <Icon style={profileIcon} name="angle-right" size={20}/>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={settingsStyle}>
-                        <Text style={settingsTextStyle}>HELP</Text>
-                    </View>
-                    <View style={{flex:0.2}}>
-                        <TouchableOpacity style={viewLinkStyle} onPress={()=>{this.props.navigation.navigate('Help')}}>
-                            <View style={viewIconStyle}>
-                                <Icon name="question-circle" size={20}/>
-                            </View>
-                            <View style={viewTextStyle}>
-                                <Text style={profileTextStyle}>Help</Text>
-                                <Icon style={profileIcon} name="angle-right" size={20}/>
-                            </View>
+                        <View style={settingsStyle}>
+                            <Text style={settingsTextStyle}>HELP</Text>
+                        </View>
+                            <TouchableOpacity style={viewLinkStyle} onPress={()=>{this.props.navigation.navigate('Help')}}>
+                                <View style={viewIconStyle}>
+                                    <Icon name="question-circle" size={20}/>
+                                </View>
+                                <View style={viewTextStyle}>
+                                    <Text style={profileTextStyle}>Help</Text>
+                                    <Icon style={profileIcon} name="angle-right" size={20}/>
+                                </View>
 
-                        </TouchableOpacity>
-                        <TouchableOpacity style={viewLinkStyle} onPress={()=>this.props.navigation.navigate('Login')}>
-                            <View style={viewIconStyle}>
-                                <Icon name="sign-out" size={20}/>
-                            </View>
-                            <View style={viewTextStyle}>
-                                <Text style={profileTextStyle}>Log Out</Text>
-                                <Icon style={profileIcon} name="angle-right" size={20}/>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={viewStyle}>
-                        <Text>Made with <Icon name="heart" size={15} style={{color:'red'}}/> in India</Text>
-                    </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={viewLinkStyle} onPress={()=>this.props.navigation.navigate('Login')}>
+                                <View style={viewIconStyle}>
+                                    <Icon name="sign-out" size={20}/>
+                                </View>
+                                <View style={viewTextStyle}>
+                                    <Text style={profileTextStyle}>Log Out</Text>
+                                    <Icon style={profileIcon} name="angle-right" size={20}/>
+                                </View>
+                            </TouchableOpacity>
+                        <View style={textBottomStyle}>
+                            <Text>Made with <Icon name="heart" size={15} style={{color:'red'}}/> in India</Text>
+                        </View>
                     </View>
                 </ScrollView>
             </SafeAreaView>
@@ -78,7 +77,6 @@ class Account extends Component{
 }
 const styles={
     viewStyle:{
-        flex:0.175,
         flexDirection:'row',
         backgroundColor:'rgb(249,250,252)',
         marginTop:10,
@@ -89,7 +87,8 @@ const styles={
         flex:1,
         height:70,
         width:70,
-        marginLeft:10
+        marginLeft:10,
+        marginTop:10
     },
     childViewStyle:{
         flex:3,
@@ -99,9 +98,9 @@ const styles={
         paddingLeft:5,
     },
     settingsStyle:{
-        flex:0.075,
+        height:50,
         backgroundColor:'rgb(249,250,252)',
-        justifyContent:'center'
+        justifyContent:'center',
     },
     settingsTextStyle:{
         flex:0.5,
@@ -110,7 +109,7 @@ const styles={
     },
     viewLinkStyle:{
         flexDirection:'row',
-        flex:0.4,
+        height:40,
         marginTop:5
     },
     viewIconStyle:{
@@ -136,6 +135,12 @@ const styles={
     },
     profileIcon:{
         flex:0.1
+    },
+    textBottomStyle:{
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:'white',
+        marginTop:40
     }
 };
 export default Account;

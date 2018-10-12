@@ -100,7 +100,7 @@ class Registration extends Component{
             <SafeAreaView style={{flex:1,backgroundColor: 'white'}}>
                 <ScrollView>
                 <Header headerText="Registration" headIcon="registered"/>
-                <Image source={require('./../image/Students.png')} size={50} style={loginImageStyle}/>
+                <Image source={require('./../image/Students.png')} size={50} style={loginImageStyle} resizeMode="contain"/>
                 <Card>
                     <Home
                         name={this.state.name}

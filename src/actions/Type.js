@@ -1,1 +1,2 @@
-export const USER_DETAIL = "USER_DETAIL"
+export const USER_DETAIL = "USER_DETAIL";
+export const STUDENT_DETAIL = "STUDENT_DETAIL";

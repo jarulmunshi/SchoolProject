@@ -54,7 +54,7 @@ class Login extends Component {
             <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
             <ScrollView>
                 <Header headerText="Login" headIcon="sign-in"/>
-                <Image source={require('./../image/Students.png')} size={50} style={loginImageStyle}/>
+                <Image source={require('./../image/Students.png')} size={50} style={loginImageStyle} resizeMode="contain"/>
                 <Card>
                     <CardSection>
                         <Input

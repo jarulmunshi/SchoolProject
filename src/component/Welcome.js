@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {Text,View} from 'react-native';
 import Color from './../helper/theme/Color';
+import {Header} from './common/Common';
 class Welcome extends Component{
     constructor(props){
         super(props);
@@ -11,6 +12,7 @@ class Welcome extends Component{
     render(){
         return(
             <View style={styles.viewStyle}>
+                <Header headerText="Home" headIcon="home"/>
                 <Text style={styles.textStyle}>Welcome {this.state.uname}</Text>
             </View>
         )
@@ -20,13 +22,13 @@ class Welcome extends Component{
 const styles={
     viewStyle:{
         backgroundColor:'white',
-        alignItems:'center',
-        justifyContent:'center',
         flex:1
     },
     textStyle:{
         fontSize:25,
-        color:Color.darkColor
+        color:Color.darkColor,
+        alignSelf:'center',
+        justifySelf:'center',
     }
 };
 export default Welcome;

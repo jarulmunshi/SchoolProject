@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Text,Image,View,SafeAreaView,TouchableOpacity} from 'react-native';
+import {Text,Image,View,SafeAreaView,TouchableOpacity,ScrollView} from 'react-native';
 import {Card,CardSection,Button,Header} from './common/Common';
 import Color from './../helper/theme/Color';
 import {updateUser} from './../actions/ProfileAction';
@@ -10,7 +10,6 @@ import Icon from 'react-native-vector-icons';
 class Profile extends Component{
     constructor(props){
         super(props);
-        debugger;
         this.state={
             id:props.userDetail.user_id,
             name:props.userDetail.username||'',
@@ -28,20 +27,25 @@ class Profile extends Component{
             isBack:true,
             usertype:props.userDetail.user_role||'',
             img:'',
-            iName:'chevron-left'
-        }
+            iName:'chevron-left',
+            editable:'false',
+            secureTextEntry:'false'
+        };
+        console.log("ID:"+this.state.id);
     }
     onBackButtonPress=()=>{
         this.props.navigation.goBack();
     };
     onUpdate=()=>{
+        debugger;
         const data={
+            user_id:this.state.id,
             username:this.state.name,
             email:this.state.email,
-            mno:this.state.mno
+            mobile_no:this.state.mno
         };
         this.props.updateUser(data).then((res)=>{
-            alert("done");
+            alert("Data updated Successfully");
         }).catch((err)=>{
             alert("Invalid");
         })
@@ -95,6 +99,7 @@ class Profile extends Component{
         //console.log(this.props.userDetail);
         return(
             <SafeAreaView style={{flex:1,backgroundColor: 'white'}}>
+            <ScrollView>
                 <Header
                     headerText="Profile Settings"
                     headIcon="user-circle"
@@ -117,6 +122,8 @@ class Profile extends Component{
                         mnoError={this.state.mnoError}
                         iconError={this.state.iconError}
                         onChange={this.onChange}
+                        editable={this.state.editable}
+                        secureTextEntry={this.state.secureTextEntry}
                     />
                     <CardSection>
                         <View style={{
@@ -133,6 +140,7 @@ class Profile extends Component{
                         <Button onPress={()=>this.onUpdate()}>Update Profile</Button>
                     </CardSection>
                 </Card>
+            </ScrollView>
             </SafeAreaView>
 
         )

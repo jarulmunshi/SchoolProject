@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Text,Image,View,SafeAreaView,TouchableOpacity} from 'react-native';
+import {Text,Image,View,SafeAreaView,TouchableOpacity,ScrollView} from 'react-native';
 import {Card,CardSection,Button,Input,Header} from './common/Common';
 import Color from './../helper/theme/Color';
 import DatePicker from 'react-native-datepicker';
@@ -27,6 +27,7 @@ class Student extends Component{
         //debugger;
         return(
             <SafeAreaView style={{flex:1,backgroundColor: 'white'}}>
+            <ScrollView>
                 <Header
                     headerText="Add Student"
                     headIcon="user-plus"
@@ -95,7 +96,7 @@ class Student extends Component{
                         this.state.pmno + this.state.pname)}}>Add</Button>
                     </CardSection>
                 </Card>
-
+            </ScrollView>
             </SafeAreaView>
 
         )

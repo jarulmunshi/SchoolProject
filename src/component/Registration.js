@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Text,Image,View,SafeAreaView,Picker,TouchableOpacity} from 'react-native';
+import {Text,Image,View,SafeAreaView,Picker,TouchableOpacity,ScrollView} from 'react-native';
 import ModalDropDown from 'react-native-modal-dropdown';
 import {Card,CardSection,Input,Button,Header} from './common/Common';
 import Color from './../helper/theme/Color';
@@ -95,11 +95,12 @@ class Registration extends Component{
     };
     render(){
         //debugger;
+        const {viewStyle,textStyle,textSelect,loginImageStyle,newUserStyle,linkStyle}=styles;
         return(
             <SafeAreaView style={{flex:1,backgroundColor: 'white'}}>
-                {/*<Image source={require('./../image/GD.jpeg')} size={70} style={styles.imgStyle}/>*/}
+                <ScrollView>
                 <Header headerText="Registration" headIcon="registered"/>
-                <Image source={require('./../image/Students.png')} size={50} style={styles.loginImageStyle}/>
+                <Image source={require('./../image/Students.png')} size={50} style={loginImageStyle}/>
                 <Card>
                     <Home
                         name={this.state.name}
@@ -115,7 +116,7 @@ class Registration extends Component{
                     />
                     <CardSection>
                         <View style={{flex:1,flexDirection:'row',height:40,alignItems:'center'}}>
-                            <Text style={styles.textSelect}>User Type:</Text>
+                            <Text style={textSelect}>User Type:</Text>
                             <ModalDropDown
                                 defaultIndex={2}
                                 style={{
@@ -147,7 +148,14 @@ class Registration extends Component{
                     <CardSection>
                         <Button onPress={()=>this.validateData()}>Register</Button>
                     </CardSection>
+                    <View style={viewStyle}>
+                        <Text style={newUserStyle}>Already user?</Text>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Login')}>
+                            <Text style={linkStyle}>Login Here</Text>
+                        </TouchableOpacity>
+                    </View>
                 </Card>
+                </ScrollView>
             </SafeAreaView>
 
         )
@@ -171,11 +179,28 @@ const styles={
         width:'100%',
         alignSelf:'center',
         marginTop:20
+    },
+    viewStyle:{
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'center',
+        paddingTop:5
+    },
+    newUserStyle:{
+        color:Color.lightColor,
+        fontSize:16,
+        fontWeight:'bold',
+        paddingRight:5
+    },
+    linkStyle:{
+        color:Color.extraDark,
+        fontSize:16,
+        fontWeight:'bold'
     }
 };
-const mapToState=()=>{
+const mapStateToProps=()=>{
     return{};
 };
-export default connect(mapToState,{
+export default connect(mapStateToProps,{
     registerUser
 })(Registration);

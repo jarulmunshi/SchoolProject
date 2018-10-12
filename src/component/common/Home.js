@@ -52,11 +52,12 @@ class Home extends Component{
                     <CardSection>
                         <Input
                             onChange={(value)=>this.props.onChange(value,'password')}
-                            secureTextEntry={true}
+                            secureTextEntry={this.props.secureTextEntry || true}
                             placeholder="Password"
                             label="Password"
                             keyboardType={'default'}
                             value={this.props.password}
+                            editable={this.props.editable}
                         />
                         {this.props.passwordError !=="" &&
                         <Text style={styles.errorStyle}><Icon name={this.props.iconError} size={20}/>{this.props.passwordError}</Text>}

@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Text,View,Image,SafeAreaView,TouchableOpacity} from 'react-native';
+import {Text,View,Image,SafeAreaView,TouchableOpacity,ScrollView} from 'react-native';
 import {CardSection,Card,Input,Button,Header} from './common/Common';
 import Color from './../helper/theme/Color';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -10,8 +10,8 @@ class Login extends Component {
     constructor(props){
         super(props);
         this.state={
-            email:'',
-            password:'',
+            email:process.env.NODE_ENV === 'development' && 'Jarul@gmail.com' || '',
+            password:process.env.NODE_ENV === 'development' && 'jarul' || '',
             emailError:'',
             passwordError:'',
             iconError:''
@@ -52,7 +52,7 @@ class Login extends Component {
         const {imgStyle,viewStyle,headStyle,textStyle,linkStyle,newUserStyle,loginImageStyle}=styles
         return(
             <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-                {/*<Image source={require('./../image/GD.jpeg')} size={70} style={imgStyle}/>*/}
+            <ScrollView>
                 <Header headerText="Login" headIcon="sign-in"/>
                 <Image source={require('./../image/Students.png')} size={50} style={loginImageStyle}/>
                 <Card>
@@ -61,6 +61,7 @@ class Login extends Component {
                             onChange={(value)=>this.setState({email:value,emailError:''})}
                             placeholder="Email"
                             label="Email"
+                            value={this.state.email}
                         />
                         {this.state.emailError !=="" &&
                         <Text style={textStyle}><Icon name={this.state.iconError} size={20}/>{this.state.emailError}</Text>}
@@ -72,6 +73,7 @@ class Login extends Component {
                             placeholder="Password"
                             label="Password"
                             secureTextEntry={true}
+                            value={this.state.password}
                         />
                         {this.state.passwordError !=="" &&
                         <Text style={textStyle}><Icon name={this.state.iconError} size={20}/>{this.state.passwordError}</Text>}
@@ -86,7 +88,7 @@ class Login extends Component {
                         </TouchableOpacity>
                     </View>
                 </Card>
-
+            </ScrollView>
             </SafeAreaView>
 
         );
@@ -134,7 +136,7 @@ const styles={
         marginTop:20
     }
 };
-const mapToState=()=>{
+const mapStateToProps=()=>{
     return{};
 };
-export default connect(mapToState,{loginUser})(Login);
+export default connect(mapStateToProps,{loginUser})(Login);

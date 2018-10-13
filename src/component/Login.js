@@ -39,8 +39,16 @@ class Login extends Component {
             };
             this.props.loginUser(data).then((res)=>{
                 const name=res.username;
+                const role=res.user_role;
+                if(role === 'admin'){
+                    this.props.navigation.navigate('Tab',{res,name:res.username});
+                }else if(role === 'teacher'){
+                    this.props.navigation.navigate('TeacherTab',{res,name:res.username});
+                }else {
+                    this.props.navigation.navigate('ParentTab',{res,name:res.username});
+                }
                 console.log("Data===="+name);
-                this.props.navigation.navigate('Tab',{res,name:res.username});
+
             }).catch((err)=>{
                 alert("Invalid");
             })

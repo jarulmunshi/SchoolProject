@@ -1,32 +1,58 @@
 import React, {Component} from 'react';
-import {Text, View, FlatList,Image} from 'react-native';
+import {Text, View, FlatList,Image,TouchableOpacity,Alert} from 'react-native';
 import {Header} from './common/Common';
 import {connect} from 'react-redux';
-import {getStudents} from './../actions/StudentAction';
+import {getStudents,deleteStudent} from './../actions/StudentAction';
+import Icon from 'react-native-vector-icons/FontAwesome';
 class StudentDetail extends Component {
     constructor(props){
         super(props);
         this.state={
-            students:[]
+            sid:0
         }
     }
 
     displayStudent=()=>{
-      this.props.getStudents()
+      this.props.getStudents();
     };
 
     componentDidMount=()=>{
       this.displayStudent();
     };
-
+    deleteStud=(id)=>{
+      this.props.deleteStudent(id).then((r)=>{
+          this.displayStudent();
+      }).catch(err=>{
+          console.log(err);
+      })
+    };
+    alertDelete=()=>{
+        Alert.alert(
+            'Are you sure?',
+            'This student will be removed from your profile ',
+            [
+                {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'Yes', onPress: () =>{
+                    this.deleteStud(this.state.sid);
+                }},
+            ]
+        )
+    };
     renderRow = ({item, index}) => {
         return(
             <View style={{height:50,marginTop:10}} key={index}>
                 {item &&
-                    <View style={styles.viewStyle}>
-                        {item.Gender === true ?<Image style={styles.imgStyle} source={require(`./../image/Profile.png`)}/>:<Image style={styles.imgStyle} source={require(`./../image/Profile2.png`)}/>}
-                        <Text style={styles.textStyle}>{item.student_name}</Text>
-                    </View>
+                            <View style={styles.viewStyle}>
+                                {item.Gender === true ?<Image style={styles.imgStyle} source={require(`./../image/Profile.png`)}/>:<Image style={styles.imgStyle} source={require(`./../image/Profile2.png`)}/>}
+                                <Text style={styles.textStyle}>{item.student_name}</Text>
+                                <TouchableOpacity onPress={()=>{
+                                    this.setState({sid:item.student_id});
+                                    this.alertDelete();}
+                                }>
+                                    <Icon  style={styles.iconStyle} name="trash" size={25}></Icon>
+                                </TouchableOpacity>
+                            </View>
+
                 }
             </View>)
     };
@@ -38,6 +64,7 @@ class StudentDetail extends Component {
                 <FlatList
                     data={this.props.studentDetail}
                     renderItem={this.renderRow}
+                    keyExtractor={item=>item.student_name}
                 />
             </View>
 
@@ -61,7 +88,8 @@ const styles={
         margin:5,
         flexDirection:'row',
         alignItems:'center',
-        height:40
+        height:40,
+        flex:1
     },
     imgStyle:{
         height:25,
@@ -69,7 +97,14 @@ const styles={
     },
     textStyle:{
         paddingLeft:10,
-        fontSize:16
+        fontSize:16,
+        flex:1
+    },
+    iconStyle:{
+        color:'red',
+        paddingRight:5
     }
 };
-export default connect(mapStateToProps,{getStudents})(StudentDetail);
+export default connect(mapStateToProps,{
+    getStudents,deleteStudent
+})(StudentDetail);

@@ -2,6 +2,8 @@ import React from 'react';
 import Login from './../../component/Login';
 import Registration from './../../component/Registration';
 import Tab from './Tab';
+import ParentTab from './ParentTab';
+import TeacherTab from './TeacherTab';
 import Profile from './../../component/Profile';
 import Student from './../../component/Student';
 import Help from './../../component/Help';
@@ -17,6 +19,12 @@ const stack = createStackNavigator(
         },
         Tab:{
             screen:Tab
+        },
+        ParentTab:{
+            screen:ParentTab
+        },
+        TeacherTab:{
+            screen:TeacherTab
         },
         Profile:{
             screen:Profile

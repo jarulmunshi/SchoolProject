@@ -5,10 +5,9 @@ import {USER_DETAIL} from "./Type";
 export const updateUser=(user)=>{
     return(dispatch,getState)=>{
         return callApi(ApiConstant.baseUrl+ApiConstant.signUp+`/${user.user_id}`,'put',user,{}).then((res)=>{
-            const data=res;
             dispatch({
                 type:USER_DETAIL,
-                payload:data
+                payload:res
             });
             return Promise.resolve(res);
 

@@ -9,9 +9,8 @@ export const newStudent=(stud)=>{
             debugger;
             dispatch({
                 type:STUDENT_DETAIL,
-                payload:res
+                payload:stud
             });
-            return Promise.resolve(res.data);
         }).catch((err)=>{
             debugger
         })
@@ -31,6 +30,15 @@ export const getStudents=()=>{
             return Promise.resolve(res);
         }).catch((err)=>{
             debugger
+        })
+    }
+};
+export const deleteStudent=(id)=>{
+    return(dispatch,getState)=>{
+        return callApi(ApiConstant.baseUrl+ApiConstant.signIn+`/${id}`,'delete',{},{}).then((res)=>{
+            return;
+        }).catch((err)=>{
+            debugger;
         })
     }
 };

@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {Text,View,SafeAreaView,Image,TouchableOpacity,ScrollView,Dimensions} from 'react-native';
 import {Header} from './common/Common';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {connect} from 'react-redux';
 class Account extends Component{
     render(){
         const {viewStyle,viewTextStyle,viewIconStyle,
@@ -16,8 +17,8 @@ class Account extends Component{
                         <View style={viewStyle}>
                             <Image style={imgStyle} source={require('./../image/userIcon.png')} resizeMode="contain"/>
                             <View style={childViewStyle}>
-                                <Text style={txtStyle}>Jarul</Text>
-                                <Text style={txtStyle}>+91 7600923449</Text>
+                                <Text style={txtStyle}>{this.props.userDetail.username}</Text>
+                                <Text style={txtStyle}>+91 {this.props.userDetail.mobile_no}</Text>
                             </View>
                         </View>
                         <View style={settingsStyle}>
@@ -33,7 +34,7 @@ class Account extends Component{
                                         <Icon style={profileIcon} name="angle-right" size={20}/>
                                     </View>
                                 </TouchableOpacity>
-
+                        {this.props.userDetail.user_role === 'admin'&&
                             <TouchableOpacity style={viewLinkStyle} onPress={()=>{this.props.navigation.navigate('Student')}}>
                                 <View style={viewIconStyle}>
                                     <Icon name="user-plus" size={20}/>
@@ -42,7 +43,7 @@ class Account extends Component{
                                     <Text style={profileTextStyle}>Add Student</Text>
                                     <Icon style={profileIcon} name="angle-right" size={20}/>
                                 </View>
-                            </TouchableOpacity>
+                            </TouchableOpacity>}
 
                         <View style={settingsStyle}>
                             <Text style={settingsTextStyle}>HELP</Text>
@@ -142,4 +143,9 @@ const styles={
         marginTop:40
     }
 };
-export default Account;
+const mapStateToProps=(state)=>{
+    return{
+        userDetail:state.user.userDetail
+    };
+};
+export default connect(mapStateToProps)(Account);

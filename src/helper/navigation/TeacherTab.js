@@ -2,7 +2,6 @@ import React from 'react';
 import {createBottomTabNavigator} from 'react-navigation';
 import Account from './../../component/Account';
 import Welcome from './../../component/Welcome';
-import Students from './../../component/StudentDetail';
 import Files from './../../component/Files';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Color from './../theme/Color';
@@ -11,21 +10,9 @@ export default createBottomTabNavigator(
         Welcome:{
             screen:Welcome,
             navigationOptions: () => ({
-            tabBarIcon: () => (
-                <Icon
-                    name="home"
-                    size={24}
-                />
-            )
-            })
-        },
-
-        Students:{
-            screen:Students,
-            navigationOptions: () => ({
                 tabBarIcon: () => (
                     <Icon
-                        name="users"
+                        name="home"
                         size={24}
                     />
                 )

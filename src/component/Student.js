@@ -24,7 +24,7 @@ class Student extends Component{
         this.props.navigation.goBack();
     };
     addStudent=()=>{
-        alert(this.state.gender);
+        //alert(this.state.gender);
         const data={
             student_name:this.state.name,
             Gender:this.state.gender,
@@ -34,7 +34,7 @@ class Student extends Component{
         };
         this.props.newStudent(data).then((r)=>{
             debugger;
-            this.setState({name:'',gender:1,bdate:'',pname:'',pmno:''})
+            this.setState({name:'',gender:1,bdate:'',pname:'',pmno:''});
             alert("New Student Successfully added");
         }).catch((err)=>{
             alert("Please try again");

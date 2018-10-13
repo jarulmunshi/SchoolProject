@@ -28,8 +28,8 @@ class Profile extends Component{
             usertype:props.userDetail.user_role||'',
             img:'',
             iName:'chevron-left',
-            editable:'false',
-            secureTextEntry:'false'
+            editable:false,
+            secureTextEntry:false
         };
         console.log("ID:"+this.state.id);
     }

@@ -4,6 +4,7 @@ const INTIAL_STATE={
 };
 
 export default (state=INTIAL_STATE,action)=> {
+    debugger;
     switch (action.type) {
         case STUDENT_DETAIL:
             return {...state, studentDetail: action.payload};

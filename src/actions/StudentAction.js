@@ -1,5 +1,7 @@
 import {callApi} from '../services/ApiCall';
 import ApiConstant from '../services/ApiConstant'
+import _ from 'lodash';
+
 import {STUDENT_DETAIL} from "./Type";
 
 export const newStudent=(stud)=>{
@@ -35,7 +37,13 @@ export const getStudents=()=>{
 };
 export const deleteStudent=(id)=>{
     return(dispatch,getState)=>{
+        debugger;
         return callApi(ApiConstant.baseUrl+ApiConstant.signIn+`/${id}`,'delete',{},{}).then((res)=>{
+            let studentData = getState().stud.studentDetail;
+            let studObject = _.find(studentData, {student_id: id});
+            let studIndex = studentData.findIndex(studObject);
+            studentData[studIndex].state_temp=1;
+            debugger;
             return;
         }).catch((err)=>{
             debugger;

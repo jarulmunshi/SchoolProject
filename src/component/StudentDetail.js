@@ -4,6 +4,7 @@ import {Header} from './common/Common';
 import {connect} from 'react-redux';
 import {getStudents,deleteStudent} from './../actions/StudentAction';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import _ from 'lodash';
 class StudentDetail extends Component {
     constructor(props){
         super(props);
@@ -21,7 +22,7 @@ class StudentDetail extends Component {
     };
     deleteStud=(id)=>{
       this.props.deleteStudent(id).then((r)=>{
-          this.displayStudent();
+          console.log("Done");
       }).catch(err=>{
           console.log(err);
       })
@@ -58,11 +59,12 @@ class StudentDetail extends Component {
     };
 
     render() {
+        let studentData = _.filter(this.props.studentDetail, {state_temp:0})
         return (
             <View style={{backgroundColor:'white',flex:1}}>
                 <Header headerText="Students" headIcon="users"/>
                 <FlatList
-                    data={this.props.studentDetail}
+                    data={studentData}
                     renderItem={this.renderRow}
                     keyExtractor={item=>item.student_name}
                 />
@@ -73,6 +75,7 @@ class StudentDetail extends Component {
 
 }
 const mapStateToProps=(state)=>{
+    debugger;
   return{
       studentDetail:state.stud.studentDetail
   }

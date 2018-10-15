@@ -42,7 +42,8 @@ class Profile extends Component{
             user_id:this.state.id,
             username:this.state.name,
             email:this.state.email,
-            mobile_no:this.state.mno
+            mobile_no:this.state.mno,
+            img:this.state.img
         };
         this.props.updateUser(data).then((res)=>{
             alert("Data updated Success");
@@ -84,13 +85,15 @@ class Profile extends Component{
             } else {
                 const source = { uri: response.uri };
 
-                // You can also display the image using data:
-                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-
                 this.setState({
-                    img: source,
-                });
-                alert(this.state.img);
+                    img: {
+                        uri: response.uri,
+                        type: response.type,
+                        name: response.fileName
+                    }
+
+                    });
+                debugger;
             }
         });
     };

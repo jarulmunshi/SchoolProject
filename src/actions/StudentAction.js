@@ -41,12 +41,16 @@ export const deleteStudent=(id)=>{
         return callApi(ApiConstant.baseUrl+ApiConstant.signIn+`/${id}`,'delete',{},{}).then((res)=>{
             let studentData = getState().stud.studentDetail;
             let studObject = _.find(studentData, {student_id: id});
-            let studIndex = studentData.findIndex(studObject);
-            studentData[studIndex].state_temp=1;
-            debugger;
-            return;
+            // let studIndex = studentData.findIndex(studObject);
+            let index = _.findIndex(studentData, studObject);
+            studentData[index].state_temp=1;
+            dispatch({
+                type:STUDENT_DETAIL,
+                payload:_.cloneDeep(studentData)
+            });
+            return Promise.resolve(studentData);
         }).catch((err)=>{
-            debugger;
+            return Promise.reject(err);
         })
     }
 };

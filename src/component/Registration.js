@@ -3,7 +3,6 @@ import {Text,Image,View,SafeAreaView,Picker,TouchableOpacity,ScrollView} from 'r
 import ModalDropDown from 'react-native-modal-dropdown';
 import {Card,CardSection,Input,Button,Header} from './common/Common';
 import Color from './../helper/theme/Color';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import {emailEmpty,passwordEmpty,checkEmail,empty,oneEmpty} from './../validation/Validation';
 import {registerUser} from './../actions/RegistrationAction';
 import Home from './common/Home';

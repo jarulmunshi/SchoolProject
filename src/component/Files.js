@@ -50,7 +50,7 @@ class Files extends Component{
                     </CardSection>
                     <CardSection>
                         <View style={{flex:1,flexDirection:'row',height:40,alignItems:'center'}}>
-                            <Text style={styles.textSelect}>File Type:</Text>
+                            <Text style={styles.textSelect}>File Type</Text>
                             <ModalDropDown
                                 defaultIndex={0}
                                 style={{
@@ -86,7 +86,7 @@ class Files extends Component{
                     <CardSection>
                         <Input
                             placeholder="File Description"
-                            label="File Description"
+                            label="Description"
                             keyboardType={'default'}
                         />
                     </CardSection>

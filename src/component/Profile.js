@@ -73,7 +73,14 @@ class Profile extends Component{
         this.setState(this.state);
     };
     showImagePicker=()=>{
-        ImagePicker.showImagePicker((response) => {
+        var options = {
+            title: 'Select Image',
+            storageOptions: {
+                skipBackup: true,
+                path: 'images'
+            }
+        };
+        ImagePicker.showImagePicker(options,(response) => {
             console.log('Response = ', response);
 
             if (response.didCancel) {
@@ -83,17 +90,20 @@ class Profile extends Component{
             } else if (response.customButton) {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
-                const source = { uri: response.uri };
-
-                this.setState({
-                    img: {
-                        uri: response.uri,
-                        type: response.type,
-                        name: response.fileName
-                    }
-
-                    });
                 debugger;
+                console.log(response);
+                let name=response.fileName;
+                const type=name.split('.');
+                const fileType=type[type.length - 1];
+                const data=new FormData();
+                data.append('fileData',{
+                    uri:response.uri,
+                    name:response.fileName,
+                    type:fileType
+                });
+
+                this.setState({img:data});
+
             }
         });
     };

@@ -13,6 +13,7 @@ import {Provider} from 'react-redux';
 import {createStore,applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import AppReducer from './src/reducers/index';
+import Demo from './src/component/demo';
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:

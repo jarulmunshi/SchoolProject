@@ -23,7 +23,7 @@ export const updateUser=(user)=>{
             debugger;
             dispatch({
                 type:USER_DETAIL,
-                payload:res
+                payload:user
             });
             return Promise.resolve(res);
 

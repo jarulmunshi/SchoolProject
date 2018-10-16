@@ -5,11 +5,12 @@ import Color from './../helper/theme/Color';
 import {updateUser} from './../actions/ProfileAction';
 import Home from './common/Home';
 import {connect} from 'react-redux';
+import ApiConstant from '../services/ApiConstant';
 import ImagePicker from 'react-native-image-picker';
-import Icon from 'react-native-vector-icons';
 class Profile extends Component{
     constructor(props){
         super(props);
+        const imgname=ApiConstant.baseUrl+props.userDetail.profile_pic;
         this.state={
             id:props.userDetail.user_id,
             name:props.userDetail.username||'',
@@ -29,7 +30,8 @@ class Profile extends Component{
             img:'',
             iName:'chevron-left',
             editable:false,
-            secureTextEntry:false
+            secureTextEntry:false,
+            imgPath:imgname || ''
         };
         console.log("ID:"+this.state.id);
     }
@@ -43,7 +45,7 @@ class Profile extends Component{
             username:this.state.name,
             email:this.state.email,
             mobile_no:this.state.mno,
-            img:this.state.img
+            profile_pic:this.state.img
         };
         this.props.updateUser(data).then((res)=>{
             alert("Data updated Success");
@@ -73,7 +75,8 @@ class Profile extends Component{
         this.setState(this.state);
     };
     showImagePicker=()=>{
-        var options = {
+        const options = {
+            quality:0.1,
             title: 'Select Image',
             storageOptions: {
                 skipBackup: true,
@@ -90,19 +93,15 @@ class Profile extends Component{
             } else if (response.customButton) {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
-                debugger;
                 console.log(response);
                 let name=response.fileName;
                 const type=name.split('.');
                 const fileType=type[type.length - 1];
-                const data=new FormData();
-                data.append('fileData',{
+                this.setState({img:{
                     uri:response.uri,
                     name:response.fileName,
                     type:fileType
-                });
-
-                this.setState({img:data});
+                },imgPath:response.uri});
 
             }
         });
@@ -111,6 +110,7 @@ class Profile extends Component{
         //debugger;
         //console.log(this.props.userDetail);
         return(
+
             <SafeAreaView style={{flex:1,backgroundColor: 'white'}}>
             <ScrollView>
                 <Header
@@ -121,7 +121,8 @@ class Profile extends Component{
                     iName={this.state.iName}
                 />
                 <TouchableOpacity onPress={()=>this.showImagePicker()}>
-                    <Image source={require('./../image/User.png')} style={styles.imgStyle}/>
+                    {this.props.userDetail.profile_pic != null?<Image style={[styles.imgStyle,{borderRadius:50,borderColor:'gray',borderWidth:1}]} source={{uri:this.state.imgPath}} resizeMode="cover"/>:
+                    <Image source={require('./../image/User.png')} style={styles.imgStyle}/>}
                 </TouchableOpacity>
                 <Card>
                     <Home

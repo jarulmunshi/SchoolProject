@@ -35,6 +35,7 @@ export function callApi(url,type='get',data={},header={}) {
                 return Promise.reject(err);
             });
     }else if(type === 'put'){
+        debugger;
         return axios.put(url,data,{headers:reqHeader})
             .then((response) => {
                 return Promise.resolve(response);

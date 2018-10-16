@@ -3,19 +3,29 @@ import {Text,View,SafeAreaView,Image,TouchableOpacity,ScrollView,Dimensions} fro
 import {Header} from './common/Common';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux';
+import ApiConstant from '../services/ApiConstant';
 class Account extends Component{
+    constructor(props){
+        super(props);
+        const imgname=ApiConstant.baseUrl+props.userDetail.profile_pic;
+        this.state={
+            imgPath:imgname || ''
+        }
+    }
     render(){
         const {viewStyle,viewTextStyle,viewIconStyle,
             imgStyle,childViewStyle,txtStyle,settingsStyle,
             settingsTextStyle,viewLinkStyle,profileIcon,profileTextStyle,textBottomStyle}=styles;
         return(
+
             <SafeAreaView style={{backgroundColor:'white',flex:1}}>
                 <ScrollView
                 automaticallyAdjustContentInsets={false}>
                     <View>
                         <Header headerText="Account" headIcon="at"/>
                         <View style={viewStyle}>
-                            <Image style={imgStyle} source={require('./../image/userIcon.png')} resizeMode="contain"/>
+                            {this.props.userDetail.profile_pic != null?<Image style={[imgStyle,{borderRadius:45,borderColor:'gray',borderWidth:1}]} source={{uri:this.state.imgPath}} resizeMode="cover"/>:
+                            <Image style={imgStyle} source={require('./../image/userIcon.png')} resizeMode="contain"/>}
                             <View style={childViewStyle}>
                                 <Text style={txtStyle}>{this.props.userDetail.username}</Text>
                                 <Text style={txtStyle}>+91 {this.props.userDetail.mobile_no}</Text>
@@ -86,9 +96,10 @@ const styles={
     },
     imgStyle:{
         flex:1,
-        height:70,
-        width:70,
-        marginLeft:10
+        height:90,
+        width:90,
+        marginLeft:10,
+        marginTop:5
     },
     childViewStyle:{
         flex:3,

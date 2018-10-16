@@ -19,17 +19,32 @@ import {USER_DETAIL} from "./Type";
 // };
 export const updateUser=(user)=>{
     return(dispatch,getState)=>{
-        return callApi(ApiConstant.baseUrl+ApiConstant.signUp+"/fileupload",'post',user,{}).then((res)=>{
-            debugger;
+        const data= new FormData();
+        data.append('user_id',user.user_id);
+        data.append('username',user.username);
+        data.append('email',user.email);
+        data.append('mobile_no',user.mobile_no);
+        data.append('profile_pic',user.profile_pic);
+
+
+        return callApi(ApiConstant.baseUrl+ApiConstant.signUp+"/fileupload"+`/${user.user_id}`,'put',data,{'Content-Type': 'multipart/form-data'}).then((res)=>{
+            let userData = getState().user.userDetail;
+            let userObject = _.find(userData,{user_id:user.user_id});
+            let index = _.findIndex(userData, userObject);
+            userData[index].profile_pic=user.profile_pic;
+            userData[index].username=user.username;
+            userData[index].email=user.email;
+            userData[index].mobile_no=user.mobile_no;
             dispatch({
                 type:USER_DETAIL,
-                payload:user
+                payload:_.cloneDeep(userData)
             });
-            return Promise.resolve(res);
+            return Promise.resolve(userData);
 
         }).catch((err)=>{
             debugger
         })
+
     }
 
 };

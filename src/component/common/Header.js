@@ -10,7 +10,7 @@ const Header = (props) =>{
             <View style={{flex:1}}>
                 {props.isBack&&
                 <TouchableWithoutFeedback onPress={()=>props.onBackButtonPress()}>
-                    <Icon name={props.iName} size={25} style={{color:Color.darkColor}}/>
+                    <Icon name={props.iName} size={25} style={{color:Color.darkColor,marginLeft:5}}/>
                     {/*<Icon style={{paddingRight:5,color:'rgb(43,83,137)'}} name={props.headIcon} size={25}/>*/}
                 </TouchableWithoutFeedback>}
 

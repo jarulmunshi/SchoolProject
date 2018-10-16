@@ -13,7 +13,18 @@ class Files extends Component{
         }
     }
     showImagePicker=()=>{
-        ImagePicker.showImagePicker((response) => {
+        const options = {
+            quality:0.1,
+            title: 'Select Image',
+            storageOptions: {
+                skipBackup: true,
+                path: 'images'
+            },
+            customButtons:[ 
+                {name:'fileUpload',title:'Upload file'}],
+            mediaType:'mixed'
+        };
+        ImagePicker.showImagePicker(options,(response) => {
             console.log('Response = ', response);
 
             if (response.didCancel) {
@@ -80,8 +91,13 @@ class Files extends Component{
                         </View>
                     </CardSection>
                     <CardSection>
-                        <Text style={styles.textSelect}>File</Text>
-                        <Button onPress={()=>this.showImagePicker()}>Select File</Button>
+                        <View style={{height:40,
+                            flex:1,
+                            flexDirection:'row',
+                            alignItems:'center'}}>
+                            <Text style={styles.textSelect}>File</Text>
+                            <Button onPress={()=>this.showImagePicker()}>Select File</Button>
+                        </View>
                     </CardSection>
                     <CardSection>
                         <Input

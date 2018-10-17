@@ -1,17 +1,36 @@
 import React,{Component} from 'react';
-import {Text,View,Image} from 'react-native';
+import {Text,View,Image,ScrollView} from 'react-native';
 import Color from './../helper/theme/Color';
 import {Card,CardSection,Input,Button,Header} from './common/Common';
 import ModalDropDown from 'react-native-modal-dropdown';
 import ImagePicker from 'react-native-image-picker';
+import {insertFile} from './../actions/FileAction';
+import {connect} from 'react-redux';
 class Files extends Component{
     constructor(props){
         super(props);
         this.state={
             filetype:'lecturenotes',
-            img:''
+            img:'',
+            fname:'',
+            file:'',
+            fdesc:''
         }
     }
+    // showPicker=()=>{
+    //     DocumentPicker.show({
+    //         filetype: [DocumentPickerUtil.images()],
+    //     },(error,res) => {
+    //         // Android
+    //         console.log(
+    //             res.uri,
+    //             res.type, // mime type
+    //             res.fileName,
+    //             res.fileSize
+    //         );
+    //     });
+    //
+    // };
     showImagePicker=()=>{
         const options = {
             quality:0.1,
@@ -20,9 +39,8 @@ class Files extends Component{
                 skipBackup: true,
                 path: 'images'
             },
-            customButtons:[ 
-                {name:'fileUpload',title:'Upload file'}],
-            mediaType:'mixed'
+            customButtons:[
+                {name:'fileUpload',title:'Choose file'}],
         };
         ImagePicker.showImagePicker(options,(response) => {
             console.log('Response = ', response);
@@ -34,26 +52,46 @@ class Files extends Component{
             } else if (response.customButton) {
                 console.log('User tapped custom button: ', response.customButton);
             } else {
-                const source = { uri: response.uri };
+                console.log(response);
+                let name=response.fileName;
+                const type=name.split('.');
+                const fileType=type[type.length - 1];
+                this.setState({file:{
+                    uri:response.uri,
+                    name:response.fileName,
+                    type:fileType
+                }});
 
-                // You can also display the image using data:
-                // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-                this.setState({
-                    img: source,
-                });
-                alert(this.state.img);
             }
         });
     };
+    addFile=()=>{
+        const data={
+            file_name:this.state.fname,
+            file_type:this.state.filetype,
+            file:this.state.file,
+            file_description:this.state.fdesc,
+            user_id:0
+        };
+        this.props.insertFile(data).then((res)=>{
+            alert("File Uploaded Successfully");
+            this.setState({fname:'',fdesc:''});
+        }).catch((err)=>{
+            alert("error");
+        });
+        alert(data.file_name + data.file_type + data.file + data.file_description);
+
+    };
     render(){
         return(
+            <ScrollView style={{flex:1,backgroundColor:'white'}}>
             <View style={styles.viewStyle}>
                 <Header headerText="Upload Data" headIcon="upload"/>
                 <Image source={require('./../image/upload.jpg')} size={30} style={styles.loginImageStyle} resizeMode="contain"/>
                 <Card>
                     <CardSection>
                         <Input
+                            onChange={(value)=>this.setState({fname:value})}
                             placeholder="Filename"
                             label="Filename"
                             keyboardType={'default'}
@@ -101,17 +139,19 @@ class Files extends Component{
                     </CardSection>
                     <CardSection>
                         <Input
+                            onChange={(value)=>this.setState({fdesc:value})}
                             placeholder="File Description"
                             label="Description"
                             keyboardType={'default'}
                         />
                     </CardSection>
                     <CardSection>
-                        <Button>Upload</Button>
+                        <Button onPress={()=>this.addFile()}>Upload</Button>
                     </CardSection>
 
                 </Card>
             </View>
+            </ScrollView>
         )
     }
 }
@@ -139,4 +179,10 @@ const styles={
         alignSelf:'center'
     }
 };
-export default Files;
+const mapStateToProps=()=>{
+    return{
+    };
+};
+export default connect(mapStateToProps,{
+    insertFile
+})(Files);

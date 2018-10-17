@@ -7,6 +7,7 @@ import TeacherTab from './TeacherTab';
 import Profile from './../../component/Profile';
 import Student from './../../component/Student';
 import Help from './../../component/Help';
+import Lecture from './../../component/Lecture';
 import {createStackNavigator} from 'react-navigation';
 
 const stack = createStackNavigator(
@@ -34,6 +35,9 @@ const stack = createStackNavigator(
         },
         Help:{
             screen:Help
+        },
+        Lecture:{
+            screen:Lecture
         }
     },
     {

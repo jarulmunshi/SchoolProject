@@ -89,7 +89,7 @@ class Registration extends Component{
                 alert("Valid");
             }).catch((err)=>{
                 alert("error");
-            })
+            });
         }
     };
     render(){

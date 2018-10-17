@@ -2,6 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from 'react-navigation';
 import Account from './../../component/Account';
 import Welcome from './../../component/Welcome';
+import DisplayDocument from './../../component/DisplayDocument';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Color from './../theme/Color';
 export default createBottomTabNavigator(
@@ -17,7 +18,17 @@ export default createBottomTabNavigator(
                 )
             })
         },
-
+        Documents:{
+            screen:DisplayDocument,
+            navigationOptions: () => ({
+                tabBarIcon: () => (
+                    <Icon
+                        name="file"
+                        size={24}
+                    />
+                )
+            })
+        },
         Account:{
             screen:Account,
             navigationOptions: () => ({

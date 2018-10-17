@@ -59,7 +59,7 @@ class StudentDetail extends Component {
     };
 
     render() {
-        let studentData = _.filter(this.props.studentDetail, {state_temp:0})
+        let studentData = _.filter(this.props.studentDetail, {state_temp:0});
         return (
             <View style={{backgroundColor:'white',flex:1}}>
                 <Header headerText="Students" headIcon="users"/>
@@ -75,7 +75,6 @@ class StudentDetail extends Component {
 
 }
 const mapStateToProps=(state)=>{
-    debugger;
   return{
       studentDetail:state.stud.studentDetail
   }

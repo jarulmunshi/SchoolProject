@@ -15,7 +15,6 @@ class Welcome extends Component{
             <View style={styles.viewStyle}>
                 <Header headerText="Home" headIcon="home"/>
                 <Text style={styles.textStyle}>Welcome {this.state.uname}</Text>
-                <ScrollView></ScrollView>
             </View>
         )
     }

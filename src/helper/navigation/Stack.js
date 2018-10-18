@@ -9,7 +9,8 @@ import Student from './../../component/Student';
 import Help from './../../component/Help';
 import Lecture from './../../component/Lecture';
 import {createStackNavigator} from 'react-navigation';
-
+import Report from './../../component/Report';
+import Timetable from './../../component/Timetable';
 const stack = createStackNavigator(
     {
         Login:{
@@ -38,6 +39,12 @@ const stack = createStackNavigator(
         },
         Lecture:{
             screen:Lecture
+        },
+        Report:{
+            screen:Report
+        },
+        Timetable:{
+            screen:Timetable
         }
     },
     {

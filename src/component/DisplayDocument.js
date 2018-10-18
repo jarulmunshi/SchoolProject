@@ -28,12 +28,12 @@ class DisplayDocument extends Component {
                         <Text style={textStyle}>Lecture Notes</Text>
                         <Icon style={iconStyle} name="angle-right" size={20}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={childViewStyle}>
+                    <TouchableOpacity style={childViewStyle} onPress={()=>this.props.navigation.navigate('Report')}>
                         <Icon style={iconStyle} name="file" size={20}/>
                         <Text style={textStyle}>Reports</Text>
                         <Icon style={iconStyle} name="angle-right" size={20}/>
                     </TouchableOpacity>
-                    <TouchableOpacity style={childViewStyle}>
+                    <TouchableOpacity style={childViewStyle} onPress={()=>this.props.navigation.navigate('Timetable')}>
                         <Icon style={iconStyle} name="clipboard" size={20}/>
                         <Text style={textStyle}>Timetable</Text>
                         <Icon style={iconStyle} name="angle-right" size={20}/>
@@ -69,8 +69,7 @@ const styles={
         margin:15,
         flexDirection:'row',
         alignItems:'center',
-        height:60,
-        flexDirection:'row'
+        height:60
     },
     loginImageStyle:{
         height:90,

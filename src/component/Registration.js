@@ -128,12 +128,9 @@ class Registration extends Component{
                                     fontSize:16,
                                     color:Color.extraDark
                                 }}
-                                options={['Class Teacher','Teacher','Parent']}
+                                options={['Teacher','Parent']}
                                 onSelect={(value)=>{
                                     if(value==0){
-                                        data='admin'
-                                    }
-                                    else if(value==1){
                                         data='teacher'
                                     }
                                     else{

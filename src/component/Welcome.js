@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {Text,View} from 'react-native';
 import Color from './../helper/theme/Color';
 import {Header} from './common/Common';
+
 class Welcome extends Component{
     constructor(props){
         super(props);
@@ -14,6 +15,7 @@ class Welcome extends Component{
             <View style={styles.viewStyle}>
                 <Header headerText="Home" headIcon="home"/>
                 <Text style={styles.textStyle}>Welcome {this.state.uname}</Text>
+                <ScrollView></ScrollView>
             </View>
         )
     }
@@ -25,9 +27,12 @@ const styles={
         flex:1
     },
     textStyle:{
-        fontSize:25,
-        color:Color.darkColor,
-        alignSelf:'center'
+        fontSize:16,
+        color:Color.lightColor,
+        borderWidth:0.5,
+        borderColor:'gray',
+        borderRadius:4,
+        margin:10
     }
 };
 export default Welcome;

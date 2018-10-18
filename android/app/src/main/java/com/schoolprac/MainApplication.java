@@ -3,7 +3,7 @@ package com.schoolprac;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.filepicker.FilePickerPackage;
+import com.filepicker.FilePickerPackage; // import package
 import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import com.imagepicker.ImagePickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;

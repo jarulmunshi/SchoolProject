@@ -14,7 +14,9 @@ class Files extends Component{
             img:'',
             fname:'',
             file:'',
-            fdesc:''
+            fdesc:'',
+            uid:props.navigation.state.params.res.user_id ||0,
+            imgName:''
         }
     }
     // showPicker=()=>{
@@ -60,7 +62,8 @@ class Files extends Component{
                     uri:response.uri,
                     name:response.fileName,
                     type:fileType
-                }});
+                },imgName:name});
+                console.log(response.uri);
 
             }
         });
@@ -71,7 +74,7 @@ class Files extends Component{
             file_type:this.state.filetype,
             file:this.state.file,
             file_description:this.state.fdesc,
-            user_id:0
+            user_id:this.state.uid
         };
         this.props.insertFile(data).then((res)=>{
             alert("File Uploaded Successfully");
@@ -83,6 +86,7 @@ class Files extends Component{
 
     };
     render(){
+        //alert(this.state.uid);
         return(
             <ScrollView style={{flex:1,backgroundColor:'white'}}>
             <View style={styles.viewStyle}>
@@ -135,6 +139,7 @@ class Files extends Component{
                             alignItems:'center'}}>
                             <Text style={styles.textSelect}>File</Text>
                             <Button onPress={()=>this.showImagePicker()}>Select File</Button>
+                            <Text style={styles.textSelect}>{this.state.imgName}</Text>
                         </View>
                     </CardSection>
                     <CardSection>

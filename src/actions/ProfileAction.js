@@ -1,7 +1,7 @@
 import {callApi} from '../services/ApiCall';
 import ApiConstant from '../services/ApiConstant'
 import {USER_DETAIL} from "./Type";
-
+import _ from 'lodash';
 // export const updateUser=(user)=>{
 //     return(dispatch,getState)=>{
 //         return callApi(ApiConstant.baseUrl+ApiConstant.signUp+`/${user.user_id}`,'put',user,{}).then((res)=>{

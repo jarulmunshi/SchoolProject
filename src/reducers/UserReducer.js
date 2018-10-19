@@ -1,16 +1,10 @@
 import {USER_DETAIL} from '../actions/Type';
 const INTIAL_STATE={
-    userDetail: {
-        user_id:0,
-        email:'',
-        password:'',
-        name:'',
-        mno:'',
-        usertype:'parent'
-    }
+    userDetail: []
 };
 
 export default (state=INTIAL_STATE,action)=> {
+    debugger;
     switch (action.type) {
         case USER_DETAIL:
             // console.log("Data"+action.payloa);

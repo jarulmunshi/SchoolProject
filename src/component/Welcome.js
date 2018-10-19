@@ -6,15 +6,15 @@ import {Header} from './common/Common';
 class Welcome extends Component{
     constructor(props){
         super(props);
-        this.state={
-            uname:props.navigation.state.params.name ||''
-        }
+        // this.state={
+        //     uname:props.navigation.state.params.name ||''
+        // }
     }
     render(){
         return(
             <View style={styles.viewStyle}>
                 <Header headerText="Home" headIcon="home"/>
-                <Text style={styles.textStyle}>Welcome {this.state.uname}</Text>
+                {/*<Text style={styles.textStyle}>Welcome {this.state.uname}</Text>*/}
             </View>
         )
     }

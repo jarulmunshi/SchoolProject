@@ -4,6 +4,7 @@ import Account from './../../component/Account';
 import Welcome from './../../component/Welcome';
 import Students from './../../component/StudentDetail';
 import Files from './../../component/Files';
+import Users from './../../component/Users';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Color from './../theme/Color';
 export default createBottomTabNavigator(
@@ -37,6 +38,17 @@ export default createBottomTabNavigator(
                 tabBarIcon: () => (
                     <Icon
                         name="upload"
+                        size={24}
+                    />
+                )
+            })
+        },
+        Users:{
+            screen:Users,
+            navigationOptions: () => ({
+                tabBarIcon: () => (
+                    <Icon
+                        name="users"
                         size={24}
                     />
                 )

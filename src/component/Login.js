@@ -10,8 +10,8 @@ class Login extends Component {
     constructor(props){
         super(props);
         this.state={
-            email:process.env.NODE_ENV === 'development' && 'Yash@gmail.com' || '',
-            password:process.env.NODE_ENV === 'development' && 'yash' || '',
+            email:process.env.NODE_ENV === 'development' && 'Jarul@gmail.com' || '',
+            password:process.env.NODE_ENV === 'development' && 'jarul' || '',
             emailError:'',
             passwordError:'',
             iconError:'',

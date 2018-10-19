@@ -14,9 +14,14 @@ class Login extends Component {
             password:process.env.NODE_ENV === 'development' && 'yash' || '',
             emailError:'',
             passwordError:'',
-            iconError:''
+            iconError:'',
+            isBack:true,
+            iName:'chevron-left'
         };
     }
+    onBackButtonPress=()=>{
+        this.props.navigation.goBack();
+    };
     validateUser=()=>{
         if(emailEmpty(this.state.email) && passwordEmpty(this.state.password)){
             this.setState({iconError:'exclamation-circle',emailError:'Require',passwordError:'Require'});
@@ -61,7 +66,13 @@ class Login extends Component {
         return(
             <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
             <ScrollView>
-                <Header headerText="Login" headIcon="sign-in"/>
+                <Header
+                    headerText="Login"
+                    headIcon="sign-in"
+                    onBackButtonPress={this.onBackButtonPress}
+                    isBack={this.state.isBack}
+                    iName={this.state.iName}
+                />
                 <Image source={require('./../image/Students.png')} size={50} style={loginImageStyle} resizeMode="contain"/>
                 <Card>
                     <CardSection>

@@ -52,7 +52,7 @@ const stack = createStackNavigator(
         }
     },
     {
-        initialRouteName:'Login',
+        initialRouteName:'GetStart',
         headerMode:'none'
     }
 );

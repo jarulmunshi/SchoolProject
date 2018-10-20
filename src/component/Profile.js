@@ -7,26 +7,28 @@ import Home from './common/Home';
 import {connect} from 'react-redux';
 import ApiConstant from '../services/ApiConstant';
 import ImagePicker from 'react-native-image-picker';
+var profileData=[];
 class Profile extends Component{
     constructor(props){
         super(props);
         const imgname=ApiConstant.baseUrl+props.userDetail.profile_pic;
+        profileData=this.props.navigation.state.params.data;
         this.state={
-            id:props.userDetail.user_id,
-            name:props.userDetail.username||'',
+            id:profileData.user_id,
+            name:profileData.username||'',
             nameError:'',
-            email:props.userDetail.email||'',
+            email:profileData.email||'',
             emailError:'',
-            mno:props.userDetail.mobile_no||'',
+            mno:profileData.mobile_no||'',
             mnoError:'',
             iconError:'',
-            password:props.userDetail.password||'',
+            password:profileData.password||'',
             passwordError:'',
             loading:false,
             msg:'',
             color:'green',
             isBack:true,
-            usertype:props.userDetail.user_role||'',
+            usertype:profileData.user_role||'',
             img:'',
             iName:'chevron-left',
             editable:false,

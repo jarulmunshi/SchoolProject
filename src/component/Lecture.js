@@ -46,6 +46,7 @@ class Lecture extends Component {
                         </View>
                     <View>
                         <Text style={styles.textStyle}>{item.file_description}</Text>
+                        <Text style={styles.textStyle}>{item.user_id}</Text>
                     </View>
                 </View>
                 }

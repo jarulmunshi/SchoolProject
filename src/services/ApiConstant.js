@@ -3,5 +3,6 @@ module.exports={
     signUp:'user',
     login:'/login',
     signIn:'stud',
-    upload:'file'
+    upload:'file',
+    attendance:'attendance'
 };

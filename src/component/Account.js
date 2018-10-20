@@ -4,13 +4,17 @@ import {Header} from './common/Common';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux';
 import ApiConstant from '../services/ApiConstant';
+var dataArray=[];
 class Account extends Component{
     constructor(props){
         super(props);
         const imgname=ApiConstant.baseUrl+props.userDetail.profile_pic;
+        dataArray=props.navigation.state.params.data;
+        console.log(dataArray.username);
         this.state={
             imgPath:imgname || ''
-        }
+        };
+        console.log("sdfwe",dataArray);
     }
     render(){
         const {viewStyle,viewTextStyle,viewIconStyle,
@@ -27,15 +31,15 @@ class Account extends Component{
                             {this.props.userDetail.profile_pic != null?<Image style={[imgStyle,{borderRadius:45,borderColor:'gray',borderWidth:1}]} source={{uri:this.state.imgPath}} resizeMode="cover"/>:
                             <Image style={imgStyle} source={require('./../image/userIcon.png')} resizeMode="contain"/>}
                             <View style={childViewStyle}>
-                                <Text style={txtStyle}>{this.props.userDetail.username}</Text>
-                                <Text style={txtStyle}>+91 {this.props.userDetail.mobile_no}</Text>
+                                <Text style={txtStyle}>{dataArray.username||"Test"}</Text>
+                                <Text style={txtStyle}>+91 {dataArray.mobile_no||9898255612}</Text>
                             </View>
                         </View>
                         <View style={settingsStyle}>
                             <Text style={settingsTextStyle}>SETTINGS</Text>
                         </View>
 
-                                <TouchableOpacity style={viewLinkStyle} onPress={()=>{this.props.navigation.navigate('Profile')}}>
+                                <TouchableOpacity style={viewLinkStyle} onPress={()=>{this.props.navigation.navigate('Profile',{data:dataArray})}}>
                                     <View style={viewIconStyle}>
                                         <Icon name="user-circle" size={20}/>
                                     </View>

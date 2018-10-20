@@ -10,14 +10,16 @@ class Login extends Component {
     constructor(props){
         super(props);
         this.state={
-            email:process.env.NODE_ENV === 'development' && 'Jarul@gmail.com' || '',
-            password:process.env.NODE_ENV === 'development' && 'jarul' || '',
+            email:process.env.NODE_ENV === 'development' && 'shreya@gmail.com' || '',
+            password:process.env.NODE_ENV === 'development' && 'shreya' || '',
             emailError:'',
             passwordError:'',
             iconError:'',
             isBack:true,
             iName:'chevron-left',
-            loginMsg:''
+            loginMsg:'',
+            userData:[]
+
         };
     }
     onBackButtonPress=()=>{
@@ -46,17 +48,20 @@ class Login extends Component {
             this.props.loginUser(data).then((res)=>{
                 const name=res.username;
                 const role=res.user_role;
-                console.log(res);
+                this.setState({userData:res});
+                console.log("====");
+                console.log(this.state.userData);
+                console.log("====");
                 if(res.msg == 'Not verified'){
                     this.setState({loginMsg:'Your account not verified yet.Wait some time.'})
                 }
                 else {
                 if(role === 'admin'){
-                    this.props.navigation.navigate('Tab',{res,name:res.username});
+                    this.props.navigation.navigate('Tab',{res,name:res.username,data:this.state.userData});
                 }else if(role === 'teacher'){
-                    this.props.navigation.navigate('TeacherTab',{res,name:res.username});
+                   this.props.navigation.navigate('TeacherTab',{res,name:res.username,data:this.state.userData});
                 }else {
-                    this.props.navigation.navigate('ParentTab',{res,name:res.username});
+                    this.props.navigation.navigate('ParentTab',{res,name:res.username,data:this.state.userData});
                 }}
 
             }).catch((err)=>{

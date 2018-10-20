@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {Text, View, FlatList,Image,TouchableOpacity,Alert} from 'react-native';
 import {Header} from './common/Common';
 import {connect} from 'react-redux';
-import {getStudents,deleteStudent} from './../actions/StudentAction';
+import {deleteStudent} from './../actions/StudentAction';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import StudentCommon from './common/StudentCommon';
 import _ from 'lodash';
 class StudentDetail extends Component {
     constructor(props){
@@ -13,13 +14,7 @@ class StudentDetail extends Component {
         }
     }
 
-    displayStudent=()=>{
-      this.props.getStudents();
-    };
 
-    componentDidMount=()=>{
-      this.displayStudent();
-    };
     deleteStud=(id)=>{
       this.props.deleteStudent(id).then((r)=>{
           console.log("Done");
@@ -54,22 +49,18 @@ class StudentDetail extends Component {
                                 </TouchableOpacity>
                             </View>
 
-                }
+              }
             </View>)
     };
 
     render() {
         let studentData = _.filter(this.props.studentDetail, {state_temp:0});
         return (
-            <View style={{backgroundColor:'white',flex:1}}>
-                <Header headerText="Students" headIcon="users"/>
-                <FlatList
-                    data={studentData}
-                    renderItem={this.renderRow}
-                    keyExtractor={item=>item.student_name}
-                />
-            </View>
-
+           <StudentCommon
+                data={studentData}
+                renderItem={this.renderRow}
+                keyExtractor={item=>item.student_name}
+           />
         )
     }
 
@@ -108,5 +99,5 @@ const styles={
     }
 };
 export default connect(mapStateToProps,{
-    getStudents,deleteStudent
+    deleteStudent
 })(StudentDetail);

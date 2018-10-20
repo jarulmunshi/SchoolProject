@@ -1,6 +1,7 @@
 import {USER_DETAIL} from '../actions/Type';
 const INTIAL_STATE={
-    userDetail: []
+    userDetail: [],
+    userData:[]
 };
 
 export default (state=INTIAL_STATE,action)=> {
@@ -8,7 +9,7 @@ export default (state=INTIAL_STATE,action)=> {
     switch (action.type) {
         case USER_DETAIL:
             // console.log("Data"+action.payloa);
-            return {...state, userDetail: action.payload};
+            return {...state, userDetail: action.payload,userData:action.payload};
         default:
             return state;
     }

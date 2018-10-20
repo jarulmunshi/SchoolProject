@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Color from './../theme/Color';
 export default createBottomTabNavigator(
     {
-        Welcome:{
+        Home:{
             screen:Welcome,
             navigationOptions: () => ({
                 tabBarIcon: () => (

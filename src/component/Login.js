@@ -16,7 +16,8 @@ class Login extends Component {
             passwordError:'',
             iconError:'',
             isBack:true,
-            iName:'chevron-left'
+            iName:'chevron-left',
+            loginMsg:''
         };
     }
     onBackButtonPress=()=>{
@@ -45,17 +46,22 @@ class Login extends Component {
             this.props.loginUser(data).then((res)=>{
                 const name=res.username;
                 const role=res.user_role;
+                console.log(res);
+                if(res.msg == 'Not verified'){
+                    this.setState({loginMsg:'Your account not verified yet.Wait some time.'})
+                }
+                else {
                 if(role === 'admin'){
                     this.props.navigation.navigate('Tab',{res,name:res.username});
                 }else if(role === 'teacher'){
                     this.props.navigation.navigate('TeacherTab',{res,name:res.username});
                 }else {
                     this.props.navigation.navigate('ParentTab',{res,name:res.username});
-                }
-                console.log("Data===="+name);
+                }}
 
             }).catch((err)=>{
-                alert("Invalid");
+                console.log(err);
+                alert("Unauthorized User");
             })
         }
 
@@ -107,6 +113,7 @@ class Login extends Component {
                         </TouchableOpacity>
                     </View>
                 </Card>
+                <Text style={[textStyle,{alignSelf:'center'}]}>{this.state.loginMsg}</Text>
             </ScrollView>
             </SafeAreaView>
 

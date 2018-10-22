@@ -22,53 +22,61 @@ class Files extends Component{
     }
     showPicker=()=>{
         DocumentPicker.show({
-            filetype: [DocumentPickerUtil.images()],
+            filetype: [DocumentPickerUtil.allFiles()],
         },(error,res) => {
             // Android
-            console.log(
-                res.uri,
-                res.type, // mime type
-                res.fileName,
-                res.fileSize
-            );
-        });
-
-    };
-    showImagePicker=()=>{
-        const options = {
-            quality:0.1,
-            title: 'Select Image',
-            storageOptions: {
-                skipBackup: true,
-                path: 'images'
-            },
-            customButtons:[
-                {name:'fileUpload',title:'Choose file'}],
-        };
-        ImagePicker.showImagePicker(options,(response) => {
-            console.log('Response = ', response);
-
-            if (response.didCancel) {
-                console.log('User cancelled image picker');
-            } else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
-            } else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
-            } else {
-                console.log(response);
-                let name=response.fileName;
+            if(res){
+                let name=res.fileName;
                 const type=name.split('.');
                 const fileType=type[type.length - 1];
                 this.setState({file:{
-                    uri:response.uri,
-                    name:response.fileName,
+                    uri:res.uri,
+                    name:res.fileName,
                     type:fileType
                 },imgName:name});
-                console.log(response.uri);
-
+                console.log(res.uri);
+            }
+            else {
+                console.log(error);
             }
         });
+
     };
+    // showImagePicker=()=>{
+    //     const options = {
+    //         quality:0.1,
+    //         title: 'Select Image',
+    //         storageOptions: {
+    //             skipBackup: true,
+    //             path: 'images'
+    //         },
+    //         customButtons:[
+    //             {name:'fileUpload',title:'Choose file'}],
+    //     };
+    //     ImagePicker.showImagePicker(options,(response) => {
+    //         console.log('Response = ', response);
+    //
+    //         if (response.didCancel) {
+    //             console.log('User cancelled image picker');
+    //         } else if (response.error) {
+    //             console.log('ImagePicker Error: ', response.error);
+    //         } else if (response.customButton) {
+    //             console.log('User tapped custom button: ', response.customButton);
+    //         } else {
+    //             console.log(response);
+    //             let name=response.fileName;
+    //             const type=name.split('.');
+    //             const fileType=type[type.length - 1];
+    //             this.setState({file:{
+    //                 uri:response.uri,
+    //                 name:response.fileName,
+    //                 type:fileType
+    //             },imgName:name});
+    //             console.log(response.uri);
+    //
+    //         }
+    //     });
+    // };
     addFile=()=>{
         const data={
             file_name:this.state.fname,

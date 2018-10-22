@@ -36,20 +36,18 @@ class DisplayUser extends Component {
                 {item &&
                 <View style={styles.viewStyle}>
                     <Text style={styles.textStyle}>{item.username}</Text>
-                    <Text>{item.status}</Text>
                         {item.status==1?
                             <Switch value={true}
                                 onValueChange={(value)=>{
-                                       debugger;
                                     this.setState({activeState:value});
                                     this.updateUserData(item.user_id);
                                 }}/>:
                             <Switch value={false}
                                     onValueChange={(value)=>{
-                                       debugger;
                                     this.setState({activeState:value});
                                     this.updateUserData(item.user_id);
                                 }}/>}
+                    <View style={{paddingRight:5}}></View>
                 </View>
 
                 }

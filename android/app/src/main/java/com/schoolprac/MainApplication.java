@@ -3,7 +3,6 @@ package com.schoolprac;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.filepicker.FilePickerPackage; // import package
 import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import com.imagepicker.ImagePickerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -27,7 +26,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new FilePickerPackage(),
             new ReactNativeDocumentPicker(),
             new ImagePickerPackage(),
             new VectorIconsPackage()

@@ -14,7 +14,7 @@ class Account extends Component{
         this.state={
             imgPath:imgname || ''
         };
-        console.log("sdfwe",dataArray);
+        //console.log("sdfwe",dataArray);
     }
     render(){
         const {viewStyle,viewTextStyle,viewIconStyle,
@@ -48,7 +48,7 @@ class Account extends Component{
                                         <Icon style={profileIcon} name="angle-right" size={20}/>
                                     </View>
                                 </TouchableOpacity>
-                        {this.props.userDetail.user_role === 'admin'&&
+                        {dataArray.user_role === 'admin'&&
                             <TouchableOpacity style={viewLinkStyle} onPress={()=>{this.props.navigation.navigate('Student')}}>
                                 <View style={viewIconStyle}>
                                     <Icon name="user-plus" size={20}/>

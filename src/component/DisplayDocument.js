@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, FlatList,Image,TouchableOpacity,Alert} from 'react-native';
+import {Text, View, FlatList,Image,TouchableOpacity,Alert,SafeAreaView} from 'react-native';
 import {Header} from './common/Common';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Color from './../helper/theme/Color';
@@ -16,7 +16,7 @@ class DisplayDocument extends Component {
         const year = new Date().getFullYear();
         const {viewStyle,childViewStyle,loginImageStyle,textStyle,iconStyle}=styles;
         return (
-            <View style={{backgroundColor:'white',flex:1}}>
+            <SafeAreaView style={{backgroundColor:'white',flex:1}}>
                 <Header headerText="Documents" headIcon="file"/>
                 <Image source={require('./../image/documents.png')} size={30} style={loginImageStyle} resizeMode="contain"/>
                 {/*<View style={viewStyle}>*/}
@@ -39,7 +39,7 @@ class DisplayDocument extends Component {
                         <Icon style={iconStyle} name="angle-right" size={20}/>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </SafeAreaView>
 
         )
     }

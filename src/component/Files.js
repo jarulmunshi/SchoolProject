@@ -1,11 +1,12 @@
 import React,{Component} from 'react';
-import {Text,View,Image,ScrollView} from 'react-native';
+import {Text,View,Image,ScrollView,SafeAreaView} from 'react-native';
 import Color from './../helper/theme/Color';
 import {Card,CardSection,Input,Button,Header} from './common/Common';
 import ModalDropDown from 'react-native-modal-dropdown';
 import ImagePicker from 'react-native-image-picker';
 import {insertFile} from './../actions/FileAction';
 import {connect} from 'react-redux';
+import {DocumentPicker,DocumentPickerUtil} from 'react-native-document-picker';
 class Files extends Component{
     constructor(props){
         super(props);
@@ -19,20 +20,20 @@ class Files extends Component{
             imgName:''
         }
     }
-    // showPicker=()=>{
-    //     DocumentPicker.show({
-    //         filetype: [DocumentPickerUtil.images()],
-    //     },(error,res) => {
-    //         // Android
-    //         console.log(
-    //             res.uri,
-    //             res.type, // mime type
-    //             res.fileName,
-    //             res.fileSize
-    //         );
-    //     });
-    //
-    // };
+    showPicker=()=>{
+        DocumentPicker.show({
+            filetype: [DocumentPickerUtil.images()],
+        },(error,res) => {
+            // Android
+            console.log(
+                res.uri,
+                res.type, // mime type
+                res.fileName,
+                res.fileSize
+            );
+        });
+
+    };
     showImagePicker=()=>{
         const options = {
             quality:0.1,
@@ -88,6 +89,7 @@ class Files extends Component{
     render(){
         //alert(this.state.uid);
         return(
+            <SafeAreaView style={{flex:1,backgroundColor:'white'}}>
             <ScrollView style={{flex:1,backgroundColor:'white'}}>
             <View style={styles.viewStyle}>
                 <Header headerText="Upload Data" headIcon="upload"/>
@@ -138,7 +140,7 @@ class Files extends Component{
                             flexDirection:'row',
                             alignItems:'center'}}>
                             <Text style={styles.textSelect}>File</Text>
-                            <Button onPress={()=>this.showImagePicker()}>Select File</Button>
+                            <Button onPress={()=>this.showPicker()}>Select File</Button>
                             <Text style={styles.textSelect}>{this.state.imgName}</Text>
                         </View>
                     </CardSection>
@@ -157,6 +159,7 @@ class Files extends Component{
                 </Card>
             </View>
             </ScrollView>
+            </SafeAreaView>
         )
     }
 }

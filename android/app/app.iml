@@ -149,7 +149,6 @@
     <orderEntry type="library" name="android.arch.core:runtime-1.1.0" level="project" />
     <orderEntry type="module" module-name="react-native-document-picker" />
     <orderEntry type="module" module-name="react-native-vector-icons" />
-    <orderEntry type="module" module-name="react-native-file-picker" />
     <orderEntry type="module" module-name="react-native-image-picker" />
   </component>
 </module>

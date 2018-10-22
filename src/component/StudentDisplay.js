@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Text,View} from 'react-native';
+import {Text,View,SafeAreaView} from 'react-native';
 import Color from './../helper/theme/Color';
 import {Header} from './common/Common';
 import {TabView,TabBar,SceneMap} from 'react-native-tab-view';
@@ -18,6 +18,7 @@ class StudentsDisplay extends Component{
     }
     render(){
         return(
+            <SafeAreaView style={{flex:1,backgroundColor:'white'}}>
             <View style={styles.viewStyle}>
                 <Header headerText="Information" headIcon="info"/>
                 <TabView navigationState={this.state}
@@ -30,6 +31,7 @@ class StudentsDisplay extends Component{
                          tabStyle={{backgroundColor:"red"}}
                 />
             </View>
+            </SafeAreaView>
         )
     }
 }

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {attendanceStudent1} from './../actions/AttendanceAction';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import StudentCommon from './common/StudentCommon';
+import {getAttendance} from './../actions/AttendanceAction';
 import _ from 'lodash';
 const date = new Date().getDate();
 const month = new Date().getMonth() + 1;
@@ -20,10 +21,26 @@ class AttendanceStudent extends Component {
             studIdC:0,
             studIdW:0,
             flag:0,
-            text:''
+            text:'',
+            press:0
         };
     }
-
+    getData=()=>{
+        this.props.getAttendance().then((r)=>{
+            if(r.msg == 'Done'){
+                this.setState({flag:1});
+                console.log("1");
+            }else {
+                this.setState({flag:0});
+                console.log("0 fxgd");
+            }
+        }).catch(err=>{
+            console.log(err);
+        })
+    };
+    componentWillMount(){
+        this.getData();
+    }
     attendanceData=(id,val)=>{
         debugger;
         const data={
@@ -40,13 +57,13 @@ class AttendanceStudent extends Component {
     renderRow = ({item, index}) => {
         return(
             <View style={{height:50,marginTop:10}} key={index}>
-                {item && this.props.flag ==0 &&
+                {item && this.state.flag==0 &&
                 <View style={styles.viewStyle}>
                     {item.Gender === true ?<Image style={styles.imgStyle} source={require(`./../image/Profile.png`)}/>
                         :<Image style={styles.imgStyle} source={require(`./../image/Profile2.png`)}/>}
                     <Text style={styles.textStyle}>{item.student_name}</Text>
                     <TouchableOpacity onPress={()=>{
-                                    this.setState({colorCheck:'green',studIdC:item.student_id,color:'black'});
+                                    this.setState({colorCheck:'green',studIdC:item.student_id,color:'black',press:1});
                                     this.attendanceData(item.student_id,1);
                                     }
                                 }>
@@ -81,7 +98,7 @@ class AttendanceStudent extends Component {
                 renderItem={this.renderRow}
                 keyExtractor={item=>item.student_name}
                 date={day}
-                done={1}
+                done={this.state.flag}
             />
         )
     }
@@ -120,5 +137,5 @@ const styles={
     }
 };
 export default connect(mapStateToProps,{
-    attendanceStudent1
+    attendanceStudent1,getAttendance
 })(AttendanceStudent);

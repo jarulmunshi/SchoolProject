@@ -47,7 +47,7 @@ class StudentDetail extends Component {
                 renderItem={this.props.renderItem}
                 keyExtractor={this.props.keyExtractor}
             />
-            {this.state.done == 1&& <Text style={{color:'green',fontSize:20,marginBottom:20,alignSelf:'center'}}>Attendance Done</Text>}
+            {this.props.done == 1&& <Text style={{color:'green',fontSize:20,marginBottom:20,alignSelf:'center'}}>Attendance Done</Text>}
         </View>
 
         )

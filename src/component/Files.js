@@ -20,80 +20,82 @@ class Files extends Component{
             imgName:''
         }
     }
-    showPicker=()=>{
-        DocumentPicker.show({
-            filetype: [DocumentPickerUtil.allFiles()],
-        },(error,res) => {
-            // Android
-            if(res){
-                let name=res.fileName;
-                const type=name.split('.');
-                const fileType=type[type.length - 1];
-                this.setState({file:{
-                    uri:res.uri,
-                    name:res.fileName,
-                    type:fileType
-                },imgName:name});
-                console.log(res.uri);
-            }
-            else {
-                console.log(error);
-            }
-        });
-
-    };
-    // showImagePicker=()=>{
-    //     const options = {
-    //         quality:0.1,
-    //         title: 'Select Image',
-    //         storageOptions: {
-    //             skipBackup: true,
-    //             path: 'images'
-    //         },
-    //         customButtons:[
-    //             {name:'fileUpload',title:'Choose file'}],
-    //     };
-    //     ImagePicker.showImagePicker(options,(response) => {
-    //         console.log('Response = ', response);
-    //
-    //         if (response.didCancel) {
-    //             console.log('User cancelled image picker');
-    //         } else if (response.error) {
-    //             console.log('ImagePicker Error: ', response.error);
-    //         } else if (response.customButton) {
-    //             console.log('User tapped custom button: ', response.customButton);
-    //         } else {
-    //             console.log(response);
-    //             let name=response.fileName;
+    // showPicker=()=>{
+    //     DocumentPicker.show({
+    //         filetype: [DocumentPickerUtil.allFiles()],
+    //     },(error,res) => {
+    //         // Android
+    //         if(res){
+    //             let name=res.fileName;
     //             const type=name.split('.');
     //             const fileType=type[type.length - 1];
     //             this.setState({file:{
-    //                 uri:response.uri,
-    //                 name:response.fileName,
+    //                 uri:res.uri,
+    //                 name:res.fileName,
     //                 type:fileType
     //             },imgName:name});
-    //             console.log(response.uri);
-    //
+    //             console.log(res.uri);
+    //         }
+    //         else {
+    //             console.log(error);
     //         }
     //     });
+    //
     // };
+    showImagePicker=()=>{
+        const options = {
+            quality:0.1,
+            title: 'Select Image',
+            storageOptions: {
+                skipBackup: true,
+                path: 'images'
+            },
+            customButtons:[
+                {name:'fileUpload',title:'Choose file'}],
+        };
+        ImagePicker.showImagePicker(options,(response) => {
+            console.log('Response = ', response);
+
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('ImagePicker Error: ', response.error);
+            } else if (response.customButton) {
+                console.log('User tapped custom button: ', response.customButton);
+            } else {
+                console.log(response);
+                let name=response.fileName;
+                const type=name.split('.');
+                const fileType=type[type.length - 1];
+                this.setState({file:{
+                    uri:response.uri,
+                    name:response.fileName,
+                    type:fileType
+                },imgName:name});
+                console.log(response.uri);
+
+            }
+        });
+    };
     addFile=()=>{
         const data={
             file_name:this.state.fname,
             file_type:this.state.filetype,
-            file:this.state.file,
+            file_info:this.state.file,
             file_description:this.state.fdesc,
             user_id:this.state.uid
         };
         this.props.insertFile(data).then((res)=>{
+            debugger;
             alert("File Uploaded Successfully");
-            this.setState({fname:'',fdesc:''});
+            //this.setState({fname:'',fdesc:''});
         }).catch((err)=>{
-            alert("error");
+            alert("Failed to upload file");
         });
         alert(data.file_name + data.file_type + data.file + data.file_description);
 
     };
+
     render(){
         //alert(this.state.uid);
         return(
@@ -148,7 +150,7 @@ class Files extends Component{
                             flexDirection:'row',
                             alignItems:'center'}}>
                             <Text style={styles.textSelect}>File</Text>
-                            <Button onPress={()=>this.showPicker()}>Select File</Button>
+                            <Button onPress={()=>this.showImagePicker()}>Select File</Button>
                             <Text style={styles.textSelect}>{this.state.imgName}</Text>
                         </View>
                     </CardSection>

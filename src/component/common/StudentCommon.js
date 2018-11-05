@@ -20,10 +20,10 @@ class StudentDetail extends Component {
     getData=()=>{
         this.props.getAttendance().then((r)=>{
             if(r.msg == 'Done'){
-                this.setState({flag:1,tab:false,done:this.props.done});
+                this.setState({flag:1,tab:false});
                 console.log(this.state.flag);
             }else {
-                this.setState({flag:0,done:this.props.done});
+                this.setState({flag:0});
                 console.log(this.state.flag);
                 console.log("Done");
             }
@@ -47,7 +47,6 @@ class StudentDetail extends Component {
                 renderItem={this.props.renderItem}
                 keyExtractor={this.props.keyExtractor}
             />
-            {this.props.done == 1&& <Text style={{color:'green',fontSize:20,marginBottom:20,alignSelf:'center'}}>Attendance Done</Text>}
         </View>
 
         )

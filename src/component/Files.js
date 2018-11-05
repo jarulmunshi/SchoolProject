@@ -83,16 +83,15 @@ class Files extends Component{
             file_type:this.state.filetype,
             file_info:this.state.file,
             file_description:this.state.fdesc,
-            user_id:this.state.uid
+            userid:this.state.uid
         };
         this.props.insertFile(data).then((res)=>{
-            debugger;
+            this.setState({fname:'',fdesc:''});
             alert("File Uploaded Successfully");
-            //this.setState({fname:'',fdesc:''});
         }).catch((err)=>{
             alert("Failed to upload file");
         });
-        alert(data.file_name + data.file_type + data.file + data.file_description);
+        //alert(data.file_name + data.file_type + data.file + data.file_description);
 
     };
 

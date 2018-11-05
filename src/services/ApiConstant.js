@@ -1,6 +1,6 @@
 module.exports={
-    //baseUrl:'http://localhost:3000/',
-    baseUrl:'http://a0e7a4a6.ngrok.io/',
+    baseUrl:'http://localhost:3300/',
+    //baseUrl:'http://48b88e29.ngrok.io',
     signUp:'user',
     login:'/login',
     signIn:'stud',

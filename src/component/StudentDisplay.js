@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {Text,View,SafeAreaView} from 'react-native';
 import Color from './../helper/theme/Color';
 import {Header} from './common/Common';
-import {TabView,TabBar,SceneMap} from 'react-native-tab-view';
+import {TabView,SceneMap} from 'react-native-tab-view';
 import Student from './StudentDetail';
 import AttendanceStudent from './AttendanceStudent';
 class StudentsDisplay extends Component{

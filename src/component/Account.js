@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Text,View,SafeAreaView,Image,TouchableOpacity,ScrollView,Dimensions} from 'react-native';
+import {Text,View,SafeAreaView,Image,TouchableOpacity,ScrollView,Dimensions,Alert} from 'react-native';
 import {Header} from './common/Common';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {connect} from 'react-redux';
@@ -16,6 +16,18 @@ class Account extends Component{
         };
         //console.log("sdfwe",dataArray);
     }
+    alertDisplay=()=>{
+        Alert.alert(
+            'Are you sure want to logout?',
+            'yes/no?',
+            [
+                {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'Yes', onPress: () =>{
+                    this.props.navigation.navigate('Login');
+                }},
+            ]
+        )
+    };
     render(){
         const {viewStyle,viewTextStyle,viewIconStyle,
             imgStyle,childViewStyle,txtStyle,settingsStyle,
@@ -72,7 +84,7 @@ class Account extends Component{
                                 </View>
 
                             </TouchableOpacity>
-                            <TouchableOpacity style={viewLinkStyle} onPress={()=>this.props.navigation.navigate('Login')}>
+                            <TouchableOpacity style={viewLinkStyle} onPress={()=>this.alertDisplay()}>
                                 <View style={viewIconStyle}>
                                     <Icon name="sign-out" size={20}/>
                                 </View>

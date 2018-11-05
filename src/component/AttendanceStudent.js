@@ -31,6 +31,7 @@ class AttendanceStudent extends Component {
                 this.setState({flag:1});
                 console.log("1");
             }else {
+                console.log(r.status);
                 this.setState({flag:0});
                 console.log("0 fxgd");
             }
@@ -45,7 +46,7 @@ class AttendanceStudent extends Component {
         debugger;
         const data={
             status:val,
-            student_id:id,
+            studentid:id,
             date:day
         };
         this.props.attendanceStudent1(data).then((r)=>{
@@ -55,9 +56,10 @@ class AttendanceStudent extends Component {
         })
     };
     renderRow = ({item, index}) => {
+        debugger;
         return(
             <View style={{height:50,marginTop:10}} key={index}>
-                {item && this.state.flag==0 &&
+                {item &&
                 <View style={styles.viewStyle}>
                     {item.Gender === true ?<Image style={styles.imgStyle} source={require(`./../image/Profile.png`)}/>
                         :<Image style={styles.imgStyle} source={require(`./../image/Profile2.png`)}/>}
@@ -72,7 +74,7 @@ class AttendanceStudent extends Component {
                             <Icon  style={[styles.iconStyle,{color:'black'}]} name="check" size={25}></Icon>}
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>{
-                                     this.setState({color:'red',studIdW:item.student_id,colorCheck:'black'});
+                                     this.setState({color:'red',studIdW:item.student_id,colorCheck:'black',press:2});
                                      this.attendanceData(item.student_id,2);
                                   }
                                 }>
@@ -80,6 +82,7 @@ class AttendanceStudent extends Component {
                         <Icon  style={[styles.iconStyle,{color:this.state.color}]} name="times" size={25}></Icon>:
                         <Icon  style={[styles.iconStyle,{color:'black'}]} name="times" size={25}></Icon>}
                     </TouchableOpacity>
+
                 </View>
                 }
 
@@ -88,6 +91,7 @@ class AttendanceStudent extends Component {
 
     render() {
         let studentData = _.filter(this.props.studentDetail, {state_temp:0});
+        console.log(studentData);
         const date = new Date().getDate();
         const month = new Date().getMonth() + 1;
         const year = new Date().getFullYear();
@@ -98,7 +102,7 @@ class AttendanceStudent extends Component {
                 renderItem={this.renderRow}
                 keyExtractor={item=>item.student_name}
                 date={day}
-                done={this.state.flag}
+                done={0}
             />
         )
     }

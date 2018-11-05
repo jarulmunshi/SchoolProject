@@ -10,7 +10,7 @@ export const insertFile=(file)=>{
         data.append('file_type',file.file_type);
         data.append('file_info',file.file_info);
         data.append('file_description',file.file_description);
-        data.append('user_id',file.user_id);
+        data.append('userid',file.userid);
         return callApi(ApiConstant.baseUrl+ApiConstant.upload,'post',data,{}).then((res)=>{
 
             dispatch({

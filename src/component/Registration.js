@@ -3,7 +3,7 @@ import {Text,Image,View,SafeAreaView,Picker,TouchableOpacity,ScrollView} from 'r
 import ModalDropDown from 'react-native-modal-dropdown';
 import {Card,CardSection,Input,Button,Header} from './common/Common';
 import Color from './../helper/theme/Color';
-import {emailEmpty,passwordEmpty,checkEmail,empty,oneEmpty} from './../validation/Validation';
+import {emailEmpty,passwordEmpty,checkEmail,checkMno,empty,oneEmpty} from './../validation/Validation';
 import {registerUser} from './../actions/RegistrationAction';
 import Home from './common/Home';
 import {connect} from 'react-redux';
@@ -75,6 +75,9 @@ class Registration extends Component{
         else if(!checkEmail(this.state.email)){
             this.setState({iconError:'exclamation-circle',emailError:'Invalid'});
         }
+        else if(!checkMno(this.state.mno)){
+            this.setState({iconError:'exclamation-circle',mnoError:'Invalid'});
+        }
         else {
             //alert(this.state.usertype);
             const data={
@@ -86,6 +89,7 @@ class Registration extends Component{
             };
             //alert(this.state.name+this.state.email+this.state.password+this.state.mno+this.state.usertype);
             this.props.registerUser(data).then((res)=>{
+                this.setState({email:'',name:'',password:'',mno:''});
                 alert("Valid");
             }).catch((err)=>{
                 alert("error");

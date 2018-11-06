@@ -1,16 +1,21 @@
 import React, {Component} from 'react';
-import {Text, View, FlatList,Image,TouchableOpacity,Alert} from 'react-native';
+import {Text,TextInput, View, FlatList,Image,TouchableOpacity,Alert} from 'react-native';
+import {Header,Button} from './Common';
 import {connect} from 'react-redux';
-import {getStudents} from './../../actions/StudentAction';
+import {getStudents,getStudentsNameBy} from './../../actions/StudentAction';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Color from './../../helper/theme/Color';
 import {getAttendance} from './../../actions/AttendanceAction';
+import _ from 'lodash';
 class StudentDetail extends Component {
     constructor(props){
         super(props);
         this.state={
             sid:0,
             flag:0,
-            done:0
+            done:0,
+            nameSearch:'',
+            searchFlag:0
         }
     }
 
@@ -35,15 +40,34 @@ class StudentDetail extends Component {
         this.displayStudent();
         this.getData();
     };
-
+    getStudentsByName=(name)=>{
+        if(name){
+        this.setState({searchFlag:1});}
+        else {
+            this.setState({searchFlag:0});
+            alert("Enter name for search");
+        }
+        //return studentData = _.filter(this.props.studentDetail, {state_temp:0,student_name:name});
+    };
 
     render() {
+        const studData=_.filter(this.props.studentDetail, {state_temp:0,student_name:this.state.nameSearch})||"No Student";
         return (
         <View style={{backgroundColor:'white',flex:1}}>
             {this.props.date &&
             <Text style={styles.textStyle}>{this.props.date}</Text>}
+            {this.props.searchStud == 1 && <View style={{flexDirection:'row',height:50,marginTop:5,paddingLeft:15}}>
+                <TextInput
+                    placeholder="Enter Student Name"
+                    style={{flex:1,borderBottomWidth:1,borderBottomColor:Color.darkColor}}
+                    onChangeText={(val)=>this.setState({nameSearch:val,searchFlag:0})}
+                />
+                <TouchableOpacity onPress={()=>this.getStudentsByName(this.state.nameSearch)}>
+                    <Icon style={{paddingRight:15,color:Color.lightColor,marginTop:10}} name="search" size={25}/>
+                </TouchableOpacity>
+            </View>}
             <FlatList
-                data={this.props.data}
+                data={this.state.searchFlag==0 && this.props.data || studData }
                 renderItem={this.props.renderItem}
                 keyExtractor={this.props.keyExtractor}
             />
@@ -87,5 +111,5 @@ const styles={
     }
 };
 export default connect(mapStateToProps,{
-    getStudents,getAttendance
+    getStudents,getAttendance,getStudentsNameBy
 })(StudentDetail);

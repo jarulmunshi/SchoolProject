@@ -3,6 +3,7 @@ import {Text, View, FlatList,Image,TouchableOpacity,Alert,Switch} from 'react-na
 import {connect} from 'react-redux';
 import {getUsers,updateUserDetail} from './../../actions/RegistrationAction';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Color from './../../helper/theme/Color';
 import _ from 'lodash';
 class DisplayUser extends Component {
     constructor(props){

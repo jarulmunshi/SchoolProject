@@ -22,7 +22,8 @@ class AttendanceStudent extends Component {
             studIdW:0,
             flag:0,
             text:'',
-            press:0
+            pressCheck:0,
+            pressUncheck:0
         };
     }
     getData=()=>{
@@ -65,7 +66,7 @@ class AttendanceStudent extends Component {
                         :<Image style={styles.imgStyle} source={require(`./../image/Profile2.png`)}/>}
                     <Text style={styles.textStyle}>{item.student_name}</Text>
                     <TouchableOpacity onPress={()=>{
-                                    this.setState({colorCheck:'green',studIdC:item.student_id,color:'black',press:1});
+                                    this.setState({colorCheck:'green',studIdC:item.student_id,color:'black',pressCheck:1});
                                     this.attendanceData(item.student_id,1);
                                     }
                                 }>
@@ -74,7 +75,7 @@ class AttendanceStudent extends Component {
                             <Icon  style={[styles.iconStyle,{color:'black'}]} name="check" size={25}></Icon>}
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>{
-                                     this.setState({color:'red',studIdW:item.student_id,colorCheck:'black',press:2});
+                                     this.setState({color:'red',studIdW:item.student_id,colorCheck:'black',pressUncheck:2});
                                      this.attendanceData(item.student_id,2);
                                   }
                                 }>

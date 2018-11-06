@@ -54,4 +54,18 @@ export const deleteStudent=(id)=>{
         })
     }
 };
-
+// export const getStudentsNameBy=(name)=>{
+//     debugger;
+//     return(dispatch,getState)=>{
+//         return callApi(ApiConstant.baseUrl+ApiConstant.signIn+`/${name}`,'post',{},{}).then((res)=>{
+//             debugger;
+//             dispatch({
+//                 type:STUDENT_DETAIL,
+//                 payload:res
+//             });
+//             return Promise.resolve(res);
+//         }).catch((err)=>{
+//             debugger
+//         })
+//     }
+// };

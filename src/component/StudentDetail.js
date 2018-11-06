@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {Text, View, FlatList,Image,TouchableOpacity,Alert} from 'react-native';
-import {Header} from './common/Common';
+import {Text,TextInput, View, FlatList,Image,TouchableOpacity,Alert} from 'react-native';
+import {Header,Button} from './common/Common';
 import {connect} from 'react-redux';
 import {deleteStudent} from './../actions/StudentAction';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -39,13 +39,14 @@ class StudentDetail extends Component {
             <View style={{height:50,marginTop:10}} key={index}>
                 {item &&
                             <View style={styles.viewStyle}>
-                                {item.Gender === true ?<Image style={styles.imgStyle} source={require(`./../image/Profile.png`)}/>:<Image style={styles.imgStyle} source={require(`./../image/Profile2.png`)}/>}
+                                {item.Gender === true ?<Image style={styles.imgStyle} source={require(`./../image/Profile.png`)}/>:
+                                    <Image style={styles.imgStyle} source={require(`./../image/Profile2.png`)}/>}
                                 <Text style={styles.textStyle}>{item.student_name}</Text>
                                 <TouchableOpacity onPress={()=>{
                                     this.setState({sid:item.student_id});
                                     this.alertDelete();}
                                 }>
-                                    <Icon  style={styles.iconStyle} name="trash" size={25}></Icon>
+                                    <Icon  style={styles.iconStyle} name="trash" size={25}/>
                                 </TouchableOpacity>
                             </View>
 
@@ -56,11 +57,12 @@ class StudentDetail extends Component {
     render() {
         let studentData = _.filter(this.props.studentDetail, {state_temp:0});
         return (
-           <StudentCommon
-                data={studentData}
-                renderItem={this.renderRow}
-                keyExtractor={item=>item.student_name}
-           />
+               <StudentCommon
+                    data={studentData}
+                    renderItem={this.renderRow}
+                    keyExtractor={item=>item.student_name}
+                    searchStud={1}
+               />
         )
     }
 

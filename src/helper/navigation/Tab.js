@@ -5,6 +5,7 @@ import Welcome from './../../component/Welcome';
 import Students from './../../component/StudentDisplay';
 import Files from './../../component/Files';
 import Users from './../../component/Users';
+import Notice from './../../component/Notice';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Color from './../theme/Color';
 export default createBottomTabNavigator(

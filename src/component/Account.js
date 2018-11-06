@@ -19,7 +19,7 @@ class Account extends Component{
     alertDisplay=()=>{
         Alert.alert(
             'Are you sure want to logout?',
-            'yes/no?',
+            '',
             [
                 {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
                 {text: 'Yes', onPress: () =>{
